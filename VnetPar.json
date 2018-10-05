@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "DevOps"
+        },
+        "location": {
+            "value": "northeurope"
+        },
+        "resourceGroup": {
+            "value": "Minsk"
+        },
+        "addressPrefix": {
+            "value": "10.10.0.0/16"
+        },
+        "subnet1Name": {
+            "value": "Front-end"
+        },
+        "subnet1AddressPrefix": {
+            "value": "10.10.1.0/24"
+        },
+        "subnet2Name": {
+            "value": "Back-end"
+        },
+        "subnet2AddressPrefix": {
+            "value": "10.10.2.0/24"
+        },
+        "enableDdosProtection": {
+            "value": false
+        }
+    }
+}
