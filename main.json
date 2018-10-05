@@ -1,0 +1,42 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {  },
+  "variables": {  },
+  "functions": [  ],
+  "resources": [
+  {
+     "apiVersion": "2017-05-10",
+     "name": "linkedTemplate",
+     "type": "Microsoft.Resources/deployments",
+     "properties": {
+       "mode": "Incremental",
+       "templateLink": {
+          "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Vnet.json",
+          "contentVersion":"1.0.0.0"
+       },
+       "parametersLink": {
+          "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/VnetPar.json",
+          "contentVersion":"1.0.0.0"
+       }
+     }
+  },
+  {
+    "apiVersion": "2017-05-10",
+    "name": "linked2Template",
+    "type": "Microsoft.Resources/deployments",
+    "properties": {
+      "mode": "Incremental",
+      "templateLink": {
+         "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Storage.json",
+         "contentVersion":"1.0.0.0"
+      },
+      "parametersLink": {
+         "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/StoragePar.json",
+         "contentVersion":"1.0.0.0"
+      }
+    }
+ }
+],
+  "outputs": {  }
+}
