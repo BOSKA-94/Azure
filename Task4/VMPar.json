@@ -59,7 +59,7 @@
             "value": "baskaulau"
         },
         "adminPassword": {
-            "value": "dbe0b7cba5dc45a8a7630725df6d8896"
+            "value": "https://task.vault.azure.net/secrets/baskaulau/687980f5686c41ca91af7bc336f84a27"
         },
         "diagnosticsStorageAccountName": {
             "value": "baskaulau"
