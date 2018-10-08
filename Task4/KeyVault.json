@@ -12,7 +12,7 @@
         "type": "array",
         "defaultValue": "{}"
       },
-      "vaultSku": {
+      "sku": {
         "type": "string",
         "defaultValue": "Standard",
         "allowedValues": [
@@ -60,7 +60,7 @@
           "tenantId": "[parameters('tenantId')]",
           "accessPolicies": "[parameters('accessPolicies')]",
           "sku": {
-            "name": "[parameters('vaultSku')]",
+            "name": "[parameters('sku')]",
             "family": "A"
           }
         }
