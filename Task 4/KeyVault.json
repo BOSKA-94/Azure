@@ -1,0 +1,41 @@
+{
+   "type": "Microsoft.KeyVault/vaults",
+   "apiVersion": "2015-06-01",
+   "name": "KeyvaultTask",
+   "location": "[resourceGroup().location]",
+   "tags": {
+        "displayName": "KeyvaultTask"
+   },
+   "properties": {
+        "enabledForDeployment": true,
+        "enabledForTemplateDeployment": true,
+        "enabledForDiskEncryption": true,
+        "tenantId": "TENANT ID",
+        "accessPolicies": [
+            {
+                "tenantId": "TENANT ID",
+                "objectId": "OBJECT ID",
+                "permissions": {
+                   "keys": "Get",
+                   "secrets": "List,Get,Set"
+               }
+            }
+        ],
+        "sku": {
+            "name": "standard",
+            "family": "A"
+        }
+    },
+    "resources": [
+      {
+        "type": "secrets",
+        "name": "KeyvaultSecretTask",
+        "apiVersion": "2015-06-01",
+        "properties": {
+           "value": "KeyvaultSecretValue1Task"
+         },
+        "dependsOn": [
+           "[concat('Microsoft.KeyVault/vaults/', KeyvaultTask)]"
+         ]
+      }]
+}
