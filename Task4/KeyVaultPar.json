@@ -2,44 +2,89 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "keyVaultName": {
-            "value": "TaskVault"
+        "name": {
+            "value": "taskfour"
         },
-        "tenantId": {
-            "value": "b41b72d0-4e9f-4c26-8a69-f949f367c91d"
+        "location": {
+            "value": "northeurope"
+        },
+        "sku": {
+            "value": "Standard"
         },
         "accessPolicies": {
             "value": [
                 {
+                    "objectId": "66ecab1e-35cb-43cb-93f2-adbf6a38aa47",
                     "tenantId": "b41b72d0-4e9f-4c26-8a69-f949f367c91d",
-                    "objectId": "b41b72d0-4e9f-4c26-8a69-f949f367c91d",
                     "permissions": {
-                        "keys": ["all"],
-                        "secrets": ["all"]
-                    }
-                },
-                {
-                    "tenantId": "b41b72d0-4e9f-4c26-8a69-f949f367c91d",
-                    "objectId": "b41b72d0-4e9f-4c26-8a69-f949f367c91d",
-                    "permissions": {
-                        "keys": ["all"],
-                        "secrets": ["all"]
+                        "keys": [
+                            "Get",
+                            "List",
+                            "Update",
+                            "Create",
+                            "Import",
+                            "Delete",
+                            "Recover",
+                            "Backup",
+                            "Restore",
+                            "Decrypt",
+                            "Encrypt",
+                            "UnwrapKey",
+                            "WrapKey",
+                            "Verify",
+                            "Sign",
+                            "Purge"
+                        ],
+                        "secrets": [
+                            "Get",
+                            "List",
+                            "Set",
+                            "Delete",
+                            "Recover",
+                            "Backup",
+                            "Restore",
+                            "Purge"
+                        ],
+                        "certificates": [
+                            "Get",
+                            "List",
+                            "Update",
+                            "Create",
+                            "Import",
+                            "Delete",
+                            "Recover",
+                            "Backup",
+                            "Restore",
+                            "ManageContacts",
+                            "ManageIssuers",
+                            "GetIssuers",
+                            "ListIssuers",
+                            "SetIssuers",
+                            "DeleteIssuers",
+                            "Purge"
+                        ]
                     }
                 }
             ]
         },
-        "secretsObject": {
+        "tenant": {
+            "value": "b41b72d0-4e9f-4c26-8a69-f949f367c91d"
+        },
+        "enabledForDeployment": {
+            "value": false
+        },
+        "enabledForTemplateDeployment": {
+            "value": false
+        },
+        "enabledForDiskEncryption": {
+            "value": false
+        },
+        "networkAcls": {
             "value": {
-                "secrets": [						
-                    {
-                        "secretName": "Secret1",
-                        "secretValue": "secretVaule1"
-                    },
-                    {
-                        "secretName": "Secret2",
-                        "secretValue": "secretValue2"
-                    }
-                ]
+                "defaultAction": "Allow",
+                "bypass": "AzureServices",
+                "virtualNetworkRules": [],
+                "ipRules": []
             }
         }
     }
