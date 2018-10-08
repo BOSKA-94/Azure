@@ -59,13 +59,7 @@
             "value": "baskaulau"
         },
         "adminPassword": {
-            "reference":  {
-                "keyVault":  {
-                   "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task"
-                  },
-                "secretName":  "baskaulau"
-             }
-             
+            "value": "dbe0b7cba5dc45a8a7630725df6d8896"
         },
         "diagnosticsStorageAccountName": {
             "value": "baskaulau"
