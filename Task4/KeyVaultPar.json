@@ -62,10 +62,10 @@
             "value": "b41b72d0-4e9f-4c26-8a69-f949f367c91d"
         },
         "enabledForDeployment": {
-            "value": false
+            "value": true
         },
         "enabledForTemplateDeployment": {
-            "value": false
+            "value": true
         },
         "enabledForDiskEncryption": {
             "value": false
