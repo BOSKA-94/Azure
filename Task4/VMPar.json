@@ -129,12 +129,6 @@
         },
         "DSCfunctions": {
             "value": "DSC.ps1\\Task"
-        },
-        "BindingDSC": {
-            "value": "https://github.com/BOSKA-94/Azure/raw/master/Task4/BindingDSC.zip"
-        },
-        "BindingDSCfunctions": {
-            "value": "BindingDSC.ps1\\Binding"
         }
     }
 }

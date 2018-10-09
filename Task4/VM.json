@@ -58,12 +58,6 @@
         },
         "DSCfunctions": {
             "type": "string"
-        },
-        "BindingDSC": {
-            "type": "string"
-        },
-        "BindingDSCfunctions": {
-            "type": "string"
         }
     },
     "variables": {
@@ -199,25 +193,6 @@
               },
               "protectedSettings": null
             }
-      },
-      {
-        "apiVersion": "2015-06-15",
-        "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(parameters('virtualMachineName'),'/Microsoft.Powershell.DSC')]",
-        "location": "[resourceGroup().location]",
-        "dependsOn": ["[concat(parameters('virtualMachineName'))]"],
-        "properties": {
-          "publisher": "Microsoft.Powershell",
-          "type": "DSC",
-          "typeHandlerVersion": "2.26",
-          "autoUpgradeMinorVersion": true,
-          "forceUpdateTag": "1.1",
-          "settings": {
-            "modulesUrl": "[parameters('BindingDSC')]",
-            "wmfVersion": "latest",
-            "ConfigurationFunction": "[parameters('BindingDSCfunctions')]"
-          }
-        }
       }
     ],
     "outputs": {
