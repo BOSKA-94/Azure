@@ -29,7 +29,7 @@
                 {
                     "name": "TaskIn",
                     "properties": {
-                        "priority": 310,
+                        "priority": 410,
                         "protocol": "TCP",
                         "access": "Allow",
                         "direction": "Inbound",
@@ -42,7 +42,7 @@
                 {
                     "name": "RDPIn",
                     "properties": {
-                        "priority": 320,
+                        "priority": 420,
                         "protocol": "TCP",
                         "access": "Allow",
                         "direction": "Inbound",
@@ -55,7 +55,7 @@
                 {
                     "name": "RDPOut",
                     "properties": {
-                        "priority": 330,
+                        "priority": 430,
                         "protocol": "TCP",
                         "access": "Allow",
                         "direction": "Outbound",
