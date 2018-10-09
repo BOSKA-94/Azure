@@ -207,9 +207,9 @@
           "autoUpgradeMinorVersion": true,
           "forceUpdateTag": "1.1",
           "settings": {
-            "modulesUrl": "https://github.com/BOSKA-94/Azure/raw/master/Task4/BindingDSC.zip",
+            "modulesUrl": "[parameters('BindingDSC')]",
             "wmfVersion": "latest",
-            "ConfigurationFunction": "BindingDSC.ps1\\Binding"
+            "ConfigurationFunction": "[parameters('BindingDSCfunctions')]"
           }
         }
       }
