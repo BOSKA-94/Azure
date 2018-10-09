@@ -172,11 +172,11 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'),'/', variables('vmExtensionName'))]",
+            "name": "[concat(parameters('virtualMachineName'),'/')]",
             "apiVersion": "2015-05-01-preview",
             "location": "[parameters('location')]",
             "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
+              "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
             ],
             "properties": {
               "publisher": "Microsoft.Powershell",
@@ -184,10 +184,10 @@
               "typeHandlerVersion": "2.19",
               "autoUpgradeMinorVersion": true,
               "settings": {
-                "ModulesUrl": "[parameters('modulesUrl')]",
-                "ConfigurationFunction": "[parameters('configurationFunction')]",
+                "DSC": "[parameters('DSC')]",
+                "ConfigurationFunction": "[parameters('DSCfunctions')]",
                 "Properties": {
-                  "MachineName": "[parameters('vmName')]"
+                  "MachineName": "[parameters('virtualMachineName')]"
                 }
               },
               "protectedSettings": null
