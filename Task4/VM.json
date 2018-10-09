@@ -52,6 +52,9 @@
         },
         "diagnosticsStorageAccountId": {
             "type": "string"
+        },
+        "DSC": {
+            "type": "string"
         }
     },
     "variables": {
