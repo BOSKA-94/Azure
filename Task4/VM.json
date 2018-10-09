@@ -58,6 +58,12 @@
         },
         "DSCfunctions": {
             "type": "string"
+        },
+        "BindingDSC": {
+            "type": "string"
+        },
+        "BindingDSCfunctions": {
+            "type": "string"
         }
     },
     "variables": {
