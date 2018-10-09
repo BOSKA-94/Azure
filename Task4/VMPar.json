@@ -40,9 +40,22 @@
                     }
                 },
                 {
-                    "name": "RDPIn",
+                    "name": "TaskOut",
                     "properties": {
                         "priority": 420,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Outbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "8080",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "*"
+                    }
+                },
+                {
+                    "name": "RDPIn",
+                    "properties": {
+                        "priority": 430,
                         "protocol": "TCP",
                         "access": "Allow",
                         "direction": "Inbound",
@@ -55,7 +68,7 @@
                 {
                     "name": "RDPOut",
                     "properties": {
-                        "priority": 430,
+                        "priority": 440,
                         "protocol": "TCP",
                         "access": "Allow",
                         "direction": "Outbound",

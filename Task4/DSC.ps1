@@ -9,10 +9,16 @@ Configuration Task {
             Name   = "Web-Server"
         }
 
-        File WebsiteContent {
-            Ensure = 'Present'
-            SourcePath = 'c:\test\index.htm'
-            DestinationPath = 'c:\inetpub\wwwroot'
+        WindowsFeature ASP
+        {
+          Ensure = �Present�
+          Name = �Web-Asp-Net45�
         }
+
+    WindowsFeature WebServerManagementConsole
+    {
+        Name = "Web-Mgmt-Console"
+        Ensure = "Present"
+    }  
     }
 }
