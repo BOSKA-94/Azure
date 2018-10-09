@@ -184,7 +184,7 @@
               "typeHandlerVersion": "2.19",
               "autoUpgradeMinorVersion": true,
               "settings": {
-                "DSC": "[parameters('DSC')]",
+                "ModulesUrl": "[parameters('DSC')]",
                 "ConfigurationFunction": "[parameters('DSCfunctions')]",
                 "Properties": {
                   "MachineName": "[parameters('virtualMachineName')]"
