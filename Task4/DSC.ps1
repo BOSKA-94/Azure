@@ -1,10 +1,10 @@
 Configuration Task 
 {
-    param ($virtualMachineName)
+    param ($MachineName)
 
     Import-DscResource -ModuleName PsDesiredStateConfiguration
 
-    Node $virtualMachineName {
+    Node $MachineName {
 
         WindowsFeature WebServer {
             Ensure = "Present"

@@ -125,7 +125,7 @@
             "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.Storage/storageAccounts/baskaulau"
         },
         "DSC": {
-            "value": "https://github.com/BOSKA-94/Azure/blob/master/Task4/Task4.zip"
+            "value": "https://github.com/BOSKA-94/Azure/raw/master/Task4/Task4.zip"
         }
     }
 }
