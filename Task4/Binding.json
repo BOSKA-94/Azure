@@ -23,7 +23,7 @@
           "autoUpgradeMinorVersion": true,
           "forceUpdateTag": "1.1",
           "settings": {
-            "modulesUrl": "https://github.com/kristianshevando/dscExtensionforExistingVM/raw/master/dscExtension.zip",
+            "modulesUrl": "https://github.com/BOSKA-94/Azure/raw/master/Task4/BindingDSC.zip",
             "wmfVersion": "latest",
             "ConfigurationFunction": "BindingDSC.ps1\\ExampleDSC"
           }
