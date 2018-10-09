@@ -11,8 +11,8 @@ Configuration Task {
 
         WindowsFeature ASP
         {
-          Ensure = �Present�
-          Name = �Web-Asp-Net45�
+          Ensure = "Present"
+          Name = "Web-Asp-Net45"
         }
 
     WindowsFeature WebServerManagementConsole
