@@ -172,12 +172,9 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('virtualMachineName'),'/')]",
+            "name": "[parameters('virtualMachineName')]",
             "apiVersion": "2015-05-01-preview",
             "location": "[parameters('location')]",
-            "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-            ],
             "properties": {
               "publisher": "Microsoft.Powershell",
               "type": "DSC",
