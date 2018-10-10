@@ -3,6 +3,9 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
+            "value": "App1Task"
+        },
+        "hostingPlanName": {
             "value": "Plan1"
         },
         "hostingEnvironment": {
@@ -11,20 +14,11 @@
         "location": {
             "value": "North Europe"
         },
-        "sku": {
-            "value": "Standard"
+        "serverFarmResourceGroup": {
+            "value": "WebApp"
         },
-        "skuCode": {
-            "value": "S1"
-        },
-        "workerSize": {
-            "value": "0"
-        },
-        "workerSizeId": {
-            "value": "0"
-        },
-        "numberOfWorkers": {
-            "value": "1"
+        "subscriptionId": {
+            "value": "4712ca89-5e08-4d78-9f70-35f10bec642b"
         }
     }
 }
