@@ -202,7 +202,7 @@
       },
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[parameters('DSCBinding')]",
+        "name": "[concat(parameters('DSCBinding'),'/', variables('vmExtensionName'))]",
         "apiVersion": "2018-06-01",
         "location": "[parameters('location')]",
         "dependsOn": [
