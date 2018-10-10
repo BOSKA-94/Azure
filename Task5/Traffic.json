@@ -22,15 +22,6 @@
         },
         "maxReturn": {
             "type": "int"
-        },
-        "trafficManagerName": {
-            "type": "String"
-        },
-        "App1Task_name": {
-            "type": "String"
-        },
-        "App2Task_name": {
-            "type": "String"
         }
     },
     "resources": [

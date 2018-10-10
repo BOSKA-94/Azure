@@ -70,10 +70,7 @@
                     "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/AppPar2.json",
                     "contentVersion": "1.0.0.0"
                 }
-            },
-            "dependsOn": [
-                "[variables('loadBalancerName')]"
-            ]
+            }
         },
         {
             "apiVersion": "2017-05-10",
