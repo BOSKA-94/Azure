@@ -8,11 +8,11 @@
         "hostingPlanName": {
             "value": "Plan2"
         },
-        "hostingEnvironment": {
-            "value": ""
-        },
         "location": {
             "value": "Central US"
+        },
+        "hostingEnvironment": {
+            "value": ""
         },
         "serverFarmResourceGroup": {
             "value": "WebApp"
