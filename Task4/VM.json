@@ -180,7 +180,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('virtualMachineName'),'/', variables('vmExtensionName'))]",
-            "apiVersion": "2015-05-01-preview",
+            "apiVersion": "2018-06-01",
             "location": "[parameters('location')]",
             "dependsOn": [
               "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
@@ -202,8 +202,8 @@
       },
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(parameters('DSCBinding'))]",
-        "apiVersion": "2015-05-01-preview",
+        "name": "[parameters('DSCBinding')]",
+        "apiVersion": "2018-06-01",
         "location": "[parameters('location')]",
         "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
