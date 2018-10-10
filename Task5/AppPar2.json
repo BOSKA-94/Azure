@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "App2Task"
+        },
+        "hostingPlanName": {
+            "value": "Plan2"
+        },
+        "hostingEnvironment": {
+            "value": ""
+        },
+        "location": {
+            "value": "Central US"
+        },
+        "serverFarmResourceGroup": {
+            "value": "WebApp"
+        },
+        "subscriptionId": {
+            "value": "4712ca89-5e08-4d78-9f70-35f10bec642b"
+        }
+    }
+}
