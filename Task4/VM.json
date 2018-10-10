@@ -70,7 +70,8 @@
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
         "vnetId": "[parameters('virtualNetworkId')]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
-        "vmExtensionName": "dscExtension"
+        "vmExtensionName": "dscExtension",
+        "dscExtensionName": "dscExtensionbin"
     },
     "resources": [
         {
@@ -202,7 +203,7 @@
       },
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(parameters('DSCBinding'),'/', variables('vmExtensionName'))]",
+        "name": "[concat(parameters('DSCBinding'),'/', variables('dscExtensionName'))]",
         "apiVersion": "2018-06-01",
         "location": "[parameters('location')]",
         "dependsOn": [
