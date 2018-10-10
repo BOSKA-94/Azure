@@ -72,7 +72,7 @@
                 }
             },
             "dependsOn": [
-                "Plan2"
+                "[variables('loadBalancerName')]"
             ]
         },
         {
