@@ -58,12 +58,6 @@
         },
         "DSCfunctions": {
             "type": "string"
-        },
-        "DSCBinding": {
-            "type": "string"
-        },
-        "DSCBindingfunctions": {
-            "type": "string"
         }
     },
     "variables": {
@@ -183,46 +177,23 @@
             "apiVersion": "2018-06-01",
             "location": "[parameters('location')]",
             "dependsOn": [
-              "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
             ],
             "properties": {
-              "publisher": "Microsoft.Powershell",
-              "type": "DSC",
-              "typeHandlerVersion": "2.19",
-              "autoUpgradeMinorVersion": true,
-              "settings": {
-                "ModulesUrl": "[parameters('DSC')]",
-                "ConfigurationFunction": "[parameters('DSCfunctions')]",
-                "Properties": {
-                  "MachineName": "[parameters('virtualMachineName')]"
-                }
-              },
-              "protectedSettings": null
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.19",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "ModulesUrl": "[parameters('DSC')]",
+                    "ConfigurationFunction": "[parameters('DSCfunctions')]",
+                    "Properties": {
+                        "MachineName": "[parameters('virtualMachineName')]"
+                    }
+                },
+                "protectedSettings": null
             }
-      },
-      {
-        "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[parameters('DSCBinding')]",
-        "apiVersion": "2018-06-01",
-        "location": "[parameters('location')]",
-        "dependsOn": [
-          "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-        ],
-        "properties": {
-          "publisher": "Microsoft.Powershell",
-          "type": "DSC",
-          "typeHandlerVersion": "2.19",
-          "autoUpgradeMinorVersion": true,
-          "settings": {
-            "ModulesUrl": "[parameters('DSCBinding')]",
-            "ConfigurationFunction": "[parameters('DSCBindingfunctions')]",
-            "Properties": {
-              "MachineName": "[parameters('virtualMachineName')]"
-            }
-          },
-          "protectedSettings": null
         }
-  }
     ],
     "outputs": {
         "adminUsername": {

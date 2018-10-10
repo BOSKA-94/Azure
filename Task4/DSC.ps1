@@ -1,8 +1,10 @@
 Configuration Task 
 {
     param ($MachineName)
+    $sitename = "Default Web Site" 
 
     Import-DscResource -ModuleName PsDesiredStateConfiguration
+    Import-DSCResource -ModuleName xWebsite
 
     Node $MachineName {
 
@@ -13,14 +15,24 @@ Configuration Task
 
         WindowsFeature ASP
         {
-          Ensure = "Present"
-          Name = "Web-Asp-Net45"
+            Ensure = "Present"
+            Name = "Web-Asp-Net45"
         }
-
-    WindowsFeature WebServerManagementConsole
-    {
-        Name = "Web-Mgmt-Console"
-        Ensure = "Present"
-    }  
+        xWebsite MainHTTPWebsite  
+        {  
+            Ensure          = "Present"  
+            Name            = $sitename
+            ApplicationPool = "DefaultAppPool" 
+            State           = "Started"  
+            PhysicalPath    = "%SystemDrive%\inetpub\wwwroot\iisstart.htm"  
+            BindingInfo     = @(MSFT_xWebBindingInformation
+                            {
+                                Protocol              = "HTTP"
+                                Port                  = 8080
+                               # HostName              = "http://localhost/"
+                            }
+                        )
+}
     }
 }
+
