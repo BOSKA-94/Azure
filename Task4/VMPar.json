@@ -128,7 +128,7 @@
             "value": "https://github.com/BOSKA-94/Azure/raw/master/Task4/DSC.zip"
         },
         "DSCfunctions": {
-            "value": "DSC.ps1\\Task"
+            "value": "dsc-all.ps1\\Task"
         }
     }
 }
