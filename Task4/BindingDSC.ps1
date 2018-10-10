@@ -1,7 +1,7 @@
 ﻿Configuration Binding
 {
 Import-DscResource -ModuleName PsDesiredStateConfiguration
-Import-DSCResource -ModuleName NetworkingDsc
+Import-DSCResource -ModuleName xWebsite
 
 param ($MachineName)
 
