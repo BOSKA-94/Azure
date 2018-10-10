@@ -1,18 +1,48 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "value": "Task"
+            "type": "string"
         },
         "relativeName": {
-            "value": "Task"
+            "type": "string"
         },
         "trafficRoutingMethod": {
-            "value": "Performance"
+            "type": "string",
+            "defaultValue": "Performance",
+            "allowedValues": [
+                "Performance",
+                "Weighted",
+                "Priority",
+                "Geographic",
+                "MultiValue",
+                "Subnet"
+            ]
         },
         "maxReturn": {
-            "value": 0
+            "type": "int"
         }
-    }
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-04-01",
+            "type": "Microsoft.Network/trafficmanagerprofiles",
+            "name": "[parameters('name')]",
+            "location": "global",
+            "properties": {
+                "trafficRoutingMethod": "[parameters('trafficRoutingMethod')]",
+                "maxReturn": "[parameters('maxReturn')]",
+                "dnsConfig": {
+                    "relativeName": "[parameters('relativeName')]",
+                    "ttl": "60"
+                },
+                "monitorConfig": {
+                    "protocol": "http",
+                    "port": "80",
+                    "path": "/"
+                }
+            }
+        }
+    ]
 }
