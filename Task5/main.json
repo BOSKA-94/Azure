@@ -70,7 +70,10 @@
                     "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/AppPar2.json",
                     "contentVersion": "1.0.0.0"
                 }
-            }
+            },
+            "dependsOn": [
+                "Plan2"
+            ]
         },
         {
             "apiVersion": "2017-05-10",
@@ -86,7 +89,11 @@
                     "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/TrafficPar.json",
                     "contentVersion": "1.0.0.0"
                 }
-            }
+            },
+            "dependsOn": [
+                "App1",
+                "App2"
+            ]
         }
     ],
     "outputs": {}
