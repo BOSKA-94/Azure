@@ -28,11 +28,11 @@
   "properties": {
     "mode": "Incremental",
     "templateLink": {
-       "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/Plan.json",
+       "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/Plan2.json",
        "contentVersion":"1.0.0.0"
     },
     "parametersLink": {
-       "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/PlanPar.json",
+       "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/PlanPar2.json",
        "contentVersion":"1.0.0.0"
     }
   }
