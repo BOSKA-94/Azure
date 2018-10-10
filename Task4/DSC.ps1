@@ -3,8 +3,7 @@ Configuration Task
     param ($MachineName)
     $sitename = "Default Web Site" 
 
-    Import-DscResource -ModuleName PsDesiredStateConfiguration
-    Import-DSCResource -ModuleName xWebsite
+    Import-DscResource -ModuleName PsDesiredStateConfiguration, xWebadministration
 
     Node $MachineName {
 
