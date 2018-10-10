@@ -1,5 +1,12 @@
 ﻿Configuration Binding
 {
+Import-DscResource -ModuleName PsDesiredStateConfiguration
+Import-DSCResource -ModuleName NetworkingDsc
+
+param ($MachineName)
+
+Node $MachineName {
+
 $sitename = "Default Web Site" 
 xWebsite MainHTTPWebsite  
 {  
@@ -16,5 +23,6 @@ xWebsite MainHTTPWebsite
                                 HostName              = "http://localhost/"
                             }
                         )
+}
 }
 }
