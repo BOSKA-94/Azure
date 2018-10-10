@@ -13,6 +13,15 @@
         },
         "maxReturn": {
             "value": 0
+        },
+        "trafficManagerName": {
+            "value": "Task"
+        },
+        "App1Task_name": {
+            "value": "App1Task"
+        },
+        "App2Task_name": {
+            "value": "App2Task"
         }
     }
 }
