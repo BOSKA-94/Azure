@@ -1,0 +1,52 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "trafficManagerName": {
+            "type": "String"
+        },
+        "webAppName": {
+            "type": "String"
+        },
+        "webAppLocationRegion": {
+            "type": "String"
+        },
+        "monitorPath": {
+            "type": "String"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/trafficManagerProfiles",
+            "name": "[parameters('trafficManagerName')]",
+            "apiVersion": "2017-05-01",
+            "location": "global",
+            "properties": {
+                "profileStatus": "Enabled",
+                "trafficRoutingMethod": "Performance",
+                "dnsConfig": {
+                    "relativeName": "[parameters('trafficManagerName')]",
+                    "ttl": 70
+                },
+                "monitorConfig": {
+                    "protocol": "HTTPS",
+                    "port": 443,
+                    "path": "[parameters('monitorPath')]"
+                },
+                "endpoints": [
+                    {
+                        "name": "[parameters('webAppName')]",
+                        "type": "Microsoft.Network/trafficManagerProfiles/azureEndpoints",
+                        "properties": {
+                            "endpointStatus": "Enabled",
+                            "targetResourceId": "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]",
+                            "weight": 1,
+                            "priority": 1,
+                            "endpointLocation": "[parameters('webAppLocationRegion')]"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
