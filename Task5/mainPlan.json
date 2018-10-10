@@ -20,7 +20,23 @@
          "contentVersion":"1.0.0.0"
       }
     }
- }
+ },
+ {
+  "apiVersion": "2017-05-10",
+  "name": "linkedTemplate2",
+  "type": "Microsoft.Resources/deployments",
+  "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+       "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/Plan.json",
+       "contentVersion":"1.0.0.0"
+    },
+    "parametersLink": {
+       "uri":"https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/PlanPar.json",
+       "contentVersion":"1.0.0.0"
+    }
+  }
+}
 ],
   "outputs": {  }
 }
