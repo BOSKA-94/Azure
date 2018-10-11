@@ -2,17 +2,38 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "name": {
+        "sites_App1Task_name": {
+            "value": "App1Task"
+        },
+        "sites_App2Task_name": {
+            "value": "App2Task"
+        },
+        "serverfarms_Plan2_name": {
+            "value": "Plan2"
+        },
+        "serverfarms_Plan1_name": {
+            "value": "Plan1"
+        },
+        "config_web_name": {
+            "value": "web"
+        },
+        "config_web_name_1": {
+            "value": "web"
+        },
+        "trafficManagerProfiles_Task_name": {
             "value": "Task"
         },
-        "relativeName": {
-            "value": "Task"
+        "hostNameBindings_task.trafficmanager.net_name": {
+            "value": "task.trafficmanager.net"
         },
-        "trafficRoutingMethod": {
-            "value": "Performance"
+        "hostNameBindings_task.trafficmanager.net_name_1": {
+            "value": "task.trafficmanager.net"
         },
-        "maxReturn": {
-            "value": 0
-        }
+        "hostNameBindings_app1task.azurewebsites.net_name": {
+            "value": "app1task.azurewebsites.net"
+        },
+        "hostNameBindings_app2task.azurewebsites.net_name": {
+            "value": "app2task.azurewebsites.net"
         }
     }
+}
