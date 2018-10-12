@@ -20,6 +20,44 @@
                     "contentVersion": "1.0.0.0"
                 }
             }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "Plan1",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/Plan.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task5/PlanPar.json",
+                    "contentVersion": "1.0.0.0"
+                }
+            },
+            "dependsOn": [
+                "SQL"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "App",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task6/App.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parametersLink": {
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task6/AppPar.json",
+                    "contentVersion": "1.0.0.0"
+                }
+            },
+            "dependsOn": [
+                "Plan1"
+            ]
         }
     ],
     "outputs": {}
