@@ -13,41 +13,41 @@
                 "secretName": "Task"
             }
         },
-            "collation": {
-                "value": "SQL_Latin1_General_CP1_CI_AS"
-            },
-            "databaseName": {
-                "value": "SQL"
-            },
-            "tier": {
-                "value": "Basic"
-            },
-            "skuName": {
-                "value": "Basic"
-            },
-            "location": {
-                "value": "northeurope"
-            },
-            "maxSizeBytes": {
-                "value": 2147483648
-            },
-            "sampleName": {
-                "value": ""
-            },
-            "serverName": {
-                "value": "task06"
-            },
-            "zoneRedundant": {
-                "value": false
-            },
-            "licenseType": {
-                "value": ""
-            },
-            "enableATP": {
-                "value": false
-            },
-            "allowAzureIps": {
-                "value": true
-            }
+        "collation": {
+            "value": "SQL_Latin1_General_CP1_CI_AS"
+        },
+        "databaseName": {
+            "value": "SQL"
+        },
+        "tier": {
+            "value": "Basic"
+        },
+        "skuName": {
+            "value": "Basic"
+        },
+        "location": {
+            "value": "northeurope"
+        },
+        "maxSizeBytes": {
+            "value": 2147483648
+        },
+        "sampleName": {
+            "value": ""
+        },
+        "serverName": {
+            "value": "task06"
+        },
+        "zoneRedundant": {
+            "value": false
+        },
+        "licenseType": {
+            "value": ""
+        },
+        "enableATP": {
+            "value": false
+        },
+        "allowAzureIps": {
+            "value": true
         }
     }
+}
