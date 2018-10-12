@@ -48,7 +48,7 @@
                 "siteConfig": {
                     "connectionStrings": [
                         {
-                            "name": "defaultConnection",
+                            "name": "Task6",
                             "ConnectionString": "[concat('Data Source=tcp:' , 'task06.database.windows.net' , ',1433;Initial Catalog=SQL;User Id=', parameters('administratorLogin'),'@','task06.database.windows.net',';Password=',parameters('administratorLoginPassword'),';')]",
                             "type": "SQLAzure"
                         }
