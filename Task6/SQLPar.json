@@ -11,7 +11,8 @@
                     "id": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task"
                 },
                 "secretName": "Task"
-            },
+            }
+        },
             "collation": {
                 "value": "SQL_Latin1_General_CP1_CI_AS"
             },
