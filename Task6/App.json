@@ -1,7 +1,26 @@
 ﻿{
-    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
     "parameters": {
+        "serverName": {
+            "type": "string"
+        },
+        "administratorLogin": {
+            "type": "string"
+        },
+        "administratorLoginPassword": {
+            "type": "securestring"
+        },
+        "databaseUsername": {
+            "type": "string"
+        },
+        "databasePassword": {
+            "type": "securestring"
+        },
+        "databaseName": {
+            "type": "string"
+        },
+        "DBServer": {
+            "type": "string"
+        },
         "name": {
             "type": "string"
         },
@@ -23,18 +42,27 @@
     },
     "resources": [
         {
-            "apiVersion": "2016-03-01",
             "name": "[parameters('name')]",
             "type": "Microsoft.Web/sites",
             "properties": {
-                "name": "[parameters('name')]",
                 "siteConfig": {
+                    "connectionStrings": [
+                        {
+                            "name": "defaultConnection",
+                            "ConnectionString": "[concat('Data Source=tcp:' , 'task06.database.windows.net' , ',1433;Initial Catalog=SQL;User Id=', parameters('administratorLogin'),'@','task06.database.windows.net',';Password=',parameters('administratorLoginPassword'),';')]",
+                            "type": "SQLAzure"
+                        }
+                    ],
                     "appSettings": []
                 },
+                "name": "[parameters('name')]",
                 "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
                 "hostingEnvironment": "[parameters('hostingEnvironment')]"
             },
+            "apiVersion": "2016-03-01",
             "location": "[parameters('location')]"
         }
-    ]
+    ],
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0"
 }

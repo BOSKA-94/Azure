@@ -2,8 +2,39 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "serverName": {
+            "value": "task06"
+        },
+        "databaseName": {
+            "value": "SQL"
+        },
+        "DBServer": {
+            "value": "task06.database.windows.net"
+        },
+        "administratorLogin": {
+            "value": "baskaulau"
+        },
+        "administratorLoginPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task"
+                },
+                "secretName": "Task"
+            }
+        },
+        "databaseUsername": {
+            "value": "baskaulau"
+        },
+        "databasePassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task"
+                },
+                "secretName": "Task"
+            }
+        },
         "name": {
-            "value": "App1Task"
+            "value": "AppSQLTask"
         },
         "hostingPlanName": {
             "value": "Plan1"
