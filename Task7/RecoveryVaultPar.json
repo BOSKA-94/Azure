@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "value": "RecoveryTask"
+            "value": "RecoveryTask7"
         },
         "location": {
             "value": "northeurope"
