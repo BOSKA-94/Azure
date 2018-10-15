@@ -113,9 +113,9 @@
         "adminPassword": {
             "reference":  {
                 "keyVault":  {
-                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task"
+                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task7"
                   },
-                "secretName":  "Task"
+                "secretName":  "DevOps"
              }
         },
         "diagnosticsStorageAccountName": {
