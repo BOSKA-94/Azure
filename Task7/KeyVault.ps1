@@ -23,6 +23,9 @@ param(
  [string]
  $StorageParPath = "C:\Azure\Task7\StoragePar.json",
 
+ [string]
+ $mainPath = "C:\Azure\Task7\main.json",
+
  [Parameter(Mandatory=$True)]
  [SecureString]
  $secretvalue
@@ -86,3 +89,15 @@ if(Test-Path $StorageParPath) {
 } else {
     New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $StoragePath;
 }
+
+# Start the deployment VM and Recovery service
+Write-Host "Starting deployment VM and Recovery service...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $mainPath;
+
+# Backup VM
+Get-AzureRmRecoveryServicesVault -Name "Task7" | Set-AzureRmRecoveryServicesVaultContext
+$schPol = Get-AzureRmRecoveryServicesBackupSchedulePolicyObject -WorkloadType "AzureVM"
+$retPol = Get-AzureRmRecoveryServicesBackupRetentionPolicyObject -WorkloadType "AzureVM"
+New-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy" -WorkloadType "AzureVM" -RetentionPolicy $retPol -SchedulePolicy $schPol
+$pol = Get-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy"
+Enable-AzureRmRecoveryServicesBackupProtection -Policy $pol -Name "comp1" -ResourceGroupName "Minsk"
