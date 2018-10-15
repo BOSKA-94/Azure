@@ -100,4 +100,4 @@ $schPol = Get-AzureRmRecoveryServicesBackupSchedulePolicyObject -WorkloadType "A
 $retPol = Get-AzureRmRecoveryServicesBackupRetentionPolicyObject -WorkloadType "AzureVM"
 New-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy" -WorkloadType "AzureVM" -RetentionPolicy $retPol -SchedulePolicy $schPol
 $pol = Get-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy"
-Enable-AzureRmRecoveryServicesBackupProtection -Policy $pol -Name "comp1" -ResourceGroupName "Minsk"
+Enable-AzureRmRecoveryServicesBackupProtection -Policy $pol -Name "comp1" -ResourceGroupName $resourceGroupName
