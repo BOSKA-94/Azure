@@ -80,7 +80,7 @@ if(Test-Path $KeyVaultParPath) {
 } else {
     New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $KeyVaultPath;
 }
-$secret = Set-AzureKeyVaultSecret -VaultName 'Task7' -Name 'DevOps' -SecretValue $secretvalue
+Set-AzureKeyVaultSecret -VaultName 'Task7' -Name 'DevOps' -SecretValue $secretvalue
 
 # Start the deployment Storage account
 Write-Host "Starting deployment Storage account...";
