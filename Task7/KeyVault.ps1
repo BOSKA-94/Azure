@@ -95,7 +95,7 @@ Write-Host "Starting deployment VM and Recovery service...";
 New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $mainPath;
 
 # Backup VM
-Get-AzureRmRecoveryServicesVault -Name "Task7" | Set-AzureRmRecoveryServicesVaultContext
+Get-AzureRmRecoveryServicesVault -Name "RecoveryTask" | Set-AzureRmRecoveryServicesVaultContext
 $schPol = Get-AzureRmRecoveryServicesBackupSchedulePolicyObject -WorkloadType "AzureVM"
 $retPol = Get-AzureRmRecoveryServicesBackupRetentionPolicyObject -WorkloadType "AzureVM"
 New-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy" -WorkloadType "AzureVM" -RetentionPolicy $retPol -SchedulePolicy $schPol
