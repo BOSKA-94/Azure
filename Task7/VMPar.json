@@ -123,6 +123,9 @@
         },
         "diagnosticsStorageAccountId": {
             "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.Storage/storageAccounts/baskaulau"
-        }
+        },
+        "DataDiskSize": {
+            "value": "30"
+}
     }
 }

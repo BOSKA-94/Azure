@@ -52,7 +52,10 @@
         },
         "diagnosticsStorageAccountId": {
             "type": "string"
-        }
+        },
+        "DataDiskSize": {
+            "type": "string"
+}
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
@@ -138,7 +141,14 @@
                         "offer": "WindowsServer",
                         "sku": "2016-Datacenter",
                         "version": "latest"
-                    }
+                    },
+                    "dataDisks": [
+                        {
+                            "diskSizeGB": "[parameters('DataDiskSize')]",
+                            "lun": 0,
+                            "createOption": "Empty"
+                        }
+                    ]
                 },
                 "networkProfile": {
                     "networkInterfaces": [
