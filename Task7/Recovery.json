@@ -119,6 +119,31 @@
             "tags": {}
         },
         {
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2017-03-30",
+            "name": "OSdisk",
+            "location": "[parameters('location')]",
+            "properties": {
+                "creationData": {
+                    "createOption": "Import",
+                    "sourceUri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-osdisk-20181016-073922.vhd?sp=r&st=2018-10-16T13:49:22Z&se=2018-10-16T21:49:22Z&spr=https&sv=2017-11-09&sig=O1mNZA73mOZc2ZgSTp4jvm43sERBpI4A9WBwt2ZMDM0%3D&sr=b"
+                },
+                "osDiskType": "[parameters('osDiskType')]"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2017-03-30",
+            "name": "Datadisk",
+            "location": "[parameters('location')]",
+            "properties": {
+                "creationData": {
+                    "createOption": "Import",
+                    "sourceUri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-datadisk-000-20181016-073922.vhd?sp=r&st=2018-10-16T13:50:57Z&se=2018-10-16T21:50:57Z&spr=https&sv=2017-11-09&sig=6igLY4LAE14rcesZiPOxltWW4pCeAvHOKb9wK7hwIwU%3D&sr=b"
+                }
+            }
+        },
+        {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-04-01",
@@ -132,7 +157,8 @@
                 },
                 "storageProfile": {
                     "osDisk": {
-                        "createOption": "fromImage",
+                        "caching": "ReadWrite",
+                        "createOption": "Attach",
                         "managedDisk": {
                             "storageAccountType": "[parameters('osDiskType')]"
                         }
@@ -145,9 +171,6 @@
                     },
                     "dataDisks": [
                         {
-                            "vhd": {
-                                "uri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-datadisk-000-20181016-073922.vhd"
-                            },
                             "name": "Task",
                             "diskSizeGB": "[parameters('DataDiskSize')]",
                             "lun": 0,
