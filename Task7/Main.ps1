@@ -12,22 +12,22 @@ param(
     $deploymentName = "Task7",
 
     [string]
-    $KeyVaultPath = "C:\Azure\Task7\KeyVault.json",
+    $KeyVaultPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/KeyVault.json",
 
     [string]
-    $KeyVaultParPath = "C:\Azure\Task7\KeyVaultPar.json",
+    $KeyVaultParPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/KeyVaultPar.json",
 
     [string]
-    $StoragePath = "C:\Azure\Task7\Storage.json",
+    $StoragePath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/Storage.json",
 
     [string]
-    $StorageParPath = "C:\Azure\Task7\StoragePar.json",
+    $StorageParPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/StoragePar.json",
 
     [string]
-    $mainPath = "C:\Azure\Task7\main.json",
+    $mainPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/main.json",
 
     [string]
-    $recoveryPath = "C:\Azure\Task7\RecoveryMain.json",
+    $recoveryPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/RecoveryMain.json",
 
     [Parameter(Mandatory = $True)]
     [SecureString]
