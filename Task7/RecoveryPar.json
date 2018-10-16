@@ -1,0 +1,131 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "northeurope"
+        },
+        "networkInterfaceName": {
+            "value": "comp1404"
+        },
+        "networkSecurityGroupName": {
+            "value": "comp1-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "HTTP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "80"
+                    }
+                },
+                {
+                    "name": "TaskIn",
+                    "properties": {
+                        "priority": 410,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "8080"
+                    }
+                },
+                {
+                    "name": "TaskOut",
+                    "properties": {
+                        "priority": 420,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Outbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "8080",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "*"
+                    }
+                },
+                {
+                    "name": "RDPIn",
+                    "properties": {
+                        "priority": 430,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                },
+                {
+                    "name": "RDPOut",
+                    "properties": {
+                        "priority": 440,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Outbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "3389",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "*"
+                    }
+                }
+            ]
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.Network/virtualNetworks/DevOps"
+        },
+        "subnetName": {
+            "value": "Front-end"
+        },
+        "publicIpAddressName": {
+            "value": "comp1-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        },
+        "virtualMachineName": {
+            "value": "comp1"
+        },
+        "virtualMachineRG": {
+            "value": "Minsk"
+        },
+        "osDiskType": {
+            "value": "Premium_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D2s_v3"
+        },
+        "adminUsername": {
+            "value": "baskaulau"
+        },
+        "adminPassword": {
+            "reference":  {
+                "keyVault":  {
+                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task7"
+                  },
+                "secretName":  "DevOps"
+             }
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "baskaulau"
+        },
+        "diagnosticsStorageAccountId": {
+            "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.Storage/storageAccounts/baskaulau"
+        },
+        "DataDiskSize": {
+            "value": "30"
+}
+    }
+}

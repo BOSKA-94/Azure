@@ -26,6 +26,12 @@ param(
     [string]
     $mainPath = "C:\Azure\Task7\main.json",
 
+    [string]
+    $recoveryPath = "C:\Azure\Task7\main.json",
+
+    [string]
+    $recoveryParPath = "C:\Azure\Task7\main.json",
+
     [Parameter(Mandatory = $True)]
     [SecureString]
     $secretvalue
@@ -101,11 +107,23 @@ $schPol = Get-AzureRmRecoveryServicesBackupSchedulePolicyObject -WorkloadType "A
 $retPol = Get-AzureRmRecoveryServicesBackupRetentionPolicyObject -WorkloadType "AzureVM";
 New-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy" -WorkloadType "AzureVM" -RetentionPolicy $retPol -SchedulePolicy $schPol;
 $pol = Get-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy";
-timeout 100;
+start-sleep -seconds 60;
 Enable-AzureRmRecoveryServicesBackupProtection -Policy $pol -Name "comp1" -ResourceGroupName $resourceGroupName;
-
-# Restore VHD
 $namedContainer = Get-AzureRmRecoveryServicesBackupContainer  -ContainerType "AzureVM" -Status "Registered" -FriendlyName "comp1";
 $backupitem = Get-AzureRmRecoveryServicesBackupItem -Container $namedContainer  -WorkloadType "AzureVM";
+Backup-AzureRmRecoveryServicesBackupItem -Item $backupitem
+
+# Restore VHD
 $rp = Get-AzureRmRecoveryServicesBackupRecoveryPoint -Item $backupitem ;
 $restorejob = Restore-AzureRmRecoveryServicesBackupItem -RecoveryPoint $rp[0] -StorageAccountName "baskaulau" -StorageAccountResourceGroupName $resourceGroupName;
+$restorejob
+
+#Create a VM from restored disks
+New-AzureRmResourceGroup -Name Backup -Location "North Europe"
+Write-Host "Starting deployment VM from restored disks...";
+if (Test-Path $recoveryParPath) {
+    New-AzureRmResourceGroupDeployment -ResourceGroupName Backup -TemplateFile $recoveryPath -TemplateParameterFile $recoveryParPath;
+}
+else {
+    New-AzureRmResourceGroupDeployment -ResourceGroupName Backup -TemplateFile $recoveryPath;
+}
