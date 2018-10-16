@@ -145,7 +145,6 @@
                 },
                 "storageProfile": {
                     "osDisk": {
-                        "osType": "Windows",
                         "name": "WindaAzure16",
                         "caching": "ReadWrite",
                         "createOption": "Attach",
