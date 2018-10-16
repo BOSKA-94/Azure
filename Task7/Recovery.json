@@ -137,12 +137,12 @@
             "name": "Datadisk",
             "location": "[parameters('location')]",
             "properties": {
-              "creationData": {
-                "createOption": "Import",
-                "sourceUri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-datadisk-000-20181016-073922.vhd"
-              }
+                "creationData": {
+                    "createOption": "Import",
+                    "sourceUri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-datadisk-000-20181016-073922.vhd"
+                }
             }
-          },
+        },
         {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
@@ -167,12 +167,15 @@
                     },
                     "dataDisks": [
                         {
-                          "lun": 0,
-                          "DataDiskSize":"[parameters('DataDiskSize')]",
-                          "caching": "ReadWrite",
-                          "createOption": "Attach"
+                            "name": "Task",
+                            "lun": 0,
+                            "DataDiskSize": "[parameters('DataDiskSize')]",
+                            "createOption": "Attach",
+                            "vhd": {
+                                "uri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-datadisk-000-20181016-073922.vhd"
+                            }
                         }
-                      ]
+                    ]
                 },
                 "networkProfile": {
                     "networkInterfaces": [
