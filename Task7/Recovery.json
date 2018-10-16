@@ -125,14 +125,16 @@
             "location": "[parameters('location')]",
             "properties": {
                 "creationData": {
-                    "createOption": "Import"
-                }
+                    "createOption": "Import",
+                    "sourceUri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-osdisk-20181016-073922.vhd"
+                },
+                "osType": "Windows"
             }
         },
         {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2016-04-30-preview",
+            "apiVersion": "2018-04-01",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
@@ -150,6 +152,12 @@
                         "vhd":{
                             "uri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-osdisk-20181016-073922.vhd"
                         }
+                    },
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2016-Datacenter",
+                        "version": "latest"
                     }
                 },
                 "networkProfile": {
