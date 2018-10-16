@@ -101,4 +101,11 @@ $schPol = Get-AzureRmRecoveryServicesBackupSchedulePolicyObject -WorkloadType "A
 $retPol = Get-AzureRmRecoveryServicesBackupRetentionPolicyObject -WorkloadType "AzureVM";
 New-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy" -WorkloadType "AzureVM" -RetentionPolicy $retPol -SchedulePolicy $schPol;
 $pol = Get-AzureRmRecoveryServicesBackupProtectionPolicy -Name "BackupPolicy";
+timeout 100;
 Enable-AzureRmRecoveryServicesBackupProtection -Policy $pol -Name "comp1" -ResourceGroupName $resourceGroupName;
+
+# Restore VHD
+$namedContainer = Get-AzureRmRecoveryServicesBackupContainer  -ContainerType "AzureVM" -Status "Registered" -FriendlyName "comp1";
+$backupitem = Get-AzureRmRecoveryServicesBackupItem -Container $namedContainer  -WorkloadType "AzureVM";
+$rp = Get-AzureRmRecoveryServicesBackupRecoveryPoint -Item $backupitem ;
+$restorejob = Restore-AzureRmRecoveryServicesBackupItem -RecoveryPoint $rp[0] -StorageAccountName "baskaulau" -StorageAccountResourceGroupName $resourceGroupName;
