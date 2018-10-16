@@ -56,7 +56,7 @@
         "DataDiskSize": {
             "type": "string",
             "defaultValue": "30"
-}
+        }
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
@@ -132,6 +132,9 @@
                 },
                 "storageProfile": {
                     "osDisk": {
+                        "vhd": {
+                            "uri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-osdisk-20181016-073922.vhd"
+                        },
                         "createOption": "fromImage",
                         "managedDisk": {
                             "storageAccountType": "[parameters('osDiskType')]"
@@ -145,10 +148,13 @@
                     },
                     "dataDisks": [
                         {
+                            "vhd": {
+                                "uri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-datadisk-000-20181016-073922.vhd"
+                            },
                             "name": "Task",
                             "diskSizeGB": "[parameters('DataDiskSize')]",
                             "lun": 0,
-                            "createOption": "Empty"
+                            "createOption": "Attach"
                         }
                     ]
                 },
