@@ -125,10 +125,8 @@
             "location": "[parameters('location')]",
             "properties": {
                 "creationData": {
-                    "createOption": "Import",
-                    "sourceUri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-osdisk-20181016-073922.vhd"
-                },
-                "osType": "Windows"
+                    "createOption": "Import"
+                }
             }
         },
         {
@@ -145,10 +143,11 @@
                 },
                 "storageProfile": {
                     "osDisk": {
+                        "osType": "Windows",
                         "name": "WindaAzure16",
                         "caching": "ReadWrite",
                         "createOption": "Attach",
-                        "vhd": {
+                        "vhd":{
                             "uri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-osdisk-20181016-073922.vhd"
                         }
                     }
