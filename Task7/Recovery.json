@@ -132,6 +132,18 @@
             }
         },
         {
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2017-03-30",
+            "name": "Datadisk",
+            "location": "[parameters('location')]",
+            "properties": {
+              "creationData": {
+                "createOption": "Import",
+                "sourceUri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-datadisk-000-20181016-073922.vhd"
+              }
+            }
+          },
+        {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2018-04-01",
@@ -152,7 +164,15 @@
                         "vhd": {
                             "uri": "https://baskaulau.blob.core.windows.net/comp1-642f8e51c4f8497ca68e00b38b2a8d04/comp1-osdisk-20181016-073922.vhd"
                         }
-                    }
+                    },
+                    "dataDisks": [
+                        {
+                          "lun": 0,
+                          "DataDiskSize":"[parameters('DataDiskSize')]",
+                          "caching": "ReadWrite",
+                          "createOption": "Attach"
+                        }
+                      ]
                 },
                 "networkProfile": {
                     "networkInterfaces": [
