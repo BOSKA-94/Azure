@@ -157,6 +157,7 @@
                 },
                 "storageProfile": {
                     "osDisk": {
+                        "name": "WindaAzure16",
                         "caching": "ReadWrite",
                         "createOption": "Attach",
                         "vhd":{
