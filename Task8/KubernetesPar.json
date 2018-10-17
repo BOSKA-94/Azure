@@ -18,10 +18,20 @@
             "value": "Standard_DS2_v2"
         },
         "servicePrincipalClientId": {
-            "value": null
+            "reference":  {
+                "keyVault":  {
+                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task7"
+                  },
+                "secretName":  "DevOps"
+             }
         },
         "servicePrincipalClientSecret": {
-            "value": null
+            "reference":  {
+                "keyVault":  {
+                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task7"
+                  },
+                "secretName":  "DevOps"
+             }
         },
         "kubernetesVersion": {
             "value": "1.11.3"
