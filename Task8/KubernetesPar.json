@@ -18,17 +18,12 @@
             "value": "Standard_DS2_v2"
         },
         "servicePrincipalClientId": {
-            "reference":  {
-                "keyVault":  {
-                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task7"
-                  },
-                "secretName":  "DevOps"
-             }
+           "value": "66ecab1e-35cb-43cb-93f2-adbf6a38aa47"
         },
         "servicePrincipalClientSecret": {
             "reference":  {
                 "keyVault":  {
-                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task7"
+                  "id":  "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task8"
                   },
                 "secretName":  "DevOps"
              }
@@ -37,7 +32,7 @@
             "value": "1.11.3"
         },
         "workspaceName": {
-            "value": "DefaultWorkspace-4712ca89-5e08-4d78-9f70-35f10bec642b-WEU"
+            "value": "Task8"
         },
         "omsWorkspaceId": {
             "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-4712ca89-5e08-4d78-9f70-35f10bec642b-WEU"
