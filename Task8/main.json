@@ -7,57 +7,19 @@
     "resources": [
         {
             "apiVersion": "2017-05-10",
-            "name": "Vnet",
+            "name": "Kubernetes",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task3/Vnet.json",
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task8/Kubernetes.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parametersLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task3/VnetPar.json",
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task8/KubernetesPar.json",
                     "contentVersion": "1.0.0.0"
                 }
             }
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "VM",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/VM.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parametersLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/VMPar.json",
-                    "contentVersion": "1.0.0.0"
-                }
-            },
-            "dependsOn": [
-                "Vnet"
-            ]
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "Recovery",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/RecoveryVault.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parametersLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task7/RecoveryVaultPar.json",
-                    "contentVersion": "1.0.0.0"
-                }
-            },
-            "dependsOn": [
-                "VM"
-            ]
         }
     ],
     "outputs": {}

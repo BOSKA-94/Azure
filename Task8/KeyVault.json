@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "defaultValue": "Task7",
+            "defaultValue": "Task8",
             "type": "string"
         },
         "location": {
