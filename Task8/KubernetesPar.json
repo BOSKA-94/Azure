@@ -35,7 +35,7 @@
             "value": "Task8"
         },
         "omsWorkspaceId": {
-            "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-4712ca89-5e08-4d78-9f70-35f10bec642b-WEU"
+            "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.OperationalInsights/workspaces/Workspace"
         },
         "workspaceRegion": {
             "value": "westeurope"
