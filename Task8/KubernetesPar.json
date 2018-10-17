@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceName": {
-            "value": "Task7"
+            "value": "Task8"
         },
         "location": {
             "value": "northeurope"

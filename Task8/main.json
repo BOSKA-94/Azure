@@ -7,22 +7,6 @@
     "resources": [
         {
             "apiVersion": "2017-05-10",
-            "name": "KeyVault",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task8/KeyVault.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parametersLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task8/KeyVaultPar.json",
-                    "contentVersion": "1.0.0.0"
-                }
-            }
-        },
-        {
-            "apiVersion": "2017-05-10",
             "name": "Kubernetes",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -35,10 +19,7 @@
                     "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task8/KubernetesPar.json",
                     "contentVersion": "1.0.0.0"
                 }
-            },
-            "dependsOn": [
-                "KeyVault"
-            ]
+            }
         }
     ],
     "outputs": {}
