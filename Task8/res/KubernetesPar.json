@@ -9,7 +9,7 @@
             "value": "northeurope"
         },
         "dnsPrefix": {
-            "value": "atlas"
+            "value": "epam"
         },
         "agentCount": {
             "value": 3
@@ -18,7 +18,7 @@
             "value": "Standard_DS1_v2"
         },
         "servicePrincipalClientId": {
-            "value": "c35eb7b0-30c4-46ef-a25b-d5ab24860aab"
+           "value": "c35eb7b0-30c4-46ef-a25b-d5ab24860aab"
         },
         "servicePrincipalClientSecret": {
             "reference":  {
@@ -35,10 +35,10 @@
             "value": "Task8"
         },
         "omsWorkspaceId": {
-            "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourcegroups/minsk/providers/microsoft.operationalinsights/workspaces/task8"
+            "value": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.OperationalInsights/workspaces/Workspace"
         },
         "workspaceRegion": {
-            "value": "northeurope"
+            "value": "westeurope"
         },
         "enableHttpApplicationRouting": {
             "value": true
