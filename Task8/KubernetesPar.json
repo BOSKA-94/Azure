@@ -12,13 +12,13 @@
             "value": "epam"
         },
         "agentCount": {
-            "value": 2
+            "value": 3
         },
         "agentVMSize": {
-            "value": "Standard_DS2_v2"
+            "value": "Standard_DS1_v2"
         },
         "servicePrincipalClientId": {
-           "value": "4712ca89-5e08-4d78-9f70-35f10bec642b"
+           "value": "c35eb7b0-30c4-46ef-a25b-d5ab24860aab"
         },
         "servicePrincipalClientSecret": {
             "reference":  {
