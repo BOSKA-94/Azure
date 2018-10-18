@@ -1,0 +1,16 @@
+param(
+    [string]
+    $subscriptionId = "4712ca89-5e08-4d78-9f70-35f10bec642b",
+
+    [string]
+    $resourceGroupName = "Minsk",
+
+    [string]
+    $resourceGroupLocation,
+
+    [string]
+    $mainPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task8/main.json"
+)
+Connect-AzureRmAccount
+Select-AzureRmSubscription -SubscriptionName $subscriptionId
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $mainPath;

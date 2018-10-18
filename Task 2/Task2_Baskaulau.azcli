@@ -1,0 +1,27 @@
+﻿az login
+az account set --subscription "4712ca89-5e08-4d78-9f70-35f10bec642b"
+az group create -n DevOps  -l eastus
+
+az network vnet create -n VNet1 -g DevOps --address-prefix 10.10.0.0/16 -l eastus --subnet-name FrontEnd --subnet-prefix 10.10.0.0/24
+az network vnet subnet create --vnet-name VNet1 -n GatewaySubnet -g DevOps --address-prefix 10.10.1.0/28
+az network public-ip create -n VNet1GWIP -g DevOps --allocation-method Dynamic
+az network vnet-gateway create -n VNet1GW -l eastus --public-ip-address VNet1GWIP -g DevOps --vnet VNet1 --gateway-type Vpn --sku VpnGw1 --vpn-type RouteBased --no-wait
+
+az network vnet create -n VNet2 -g DevOps --address-prefix 10.11.0.0/16 -l eastus --subnet-name FrontEnd --subnet-prefix 10.11.0.0/24
+az network vnet subnet create --vnet-name VNet2 -n GatewaySubnet -g DevOps --address-prefix 10.11.1.0/28
+az network public-ip create -n VNet2GWIP -g DevOps --allocation-method Dynamic
+az network vnet-gateway create -n VNet2GW -l eastus --public-ip-address VNet2GWIP -g DevOps --vnet VNet2 --gateway-type Vpn --sku VpnGw1 --vpn-type RouteBased --no-wait
+
+az group create -n Azure  -l westus
+az network vnet create -n VNet4 -g Azure --address-prefix 10.12.0.0/16 -l westus --subnet-name FrontEnd --subnet-prefix 10.12.0.0/24
+az network vnet subnet create --vnet-name VNet4 -n GatewaySubnet -g Azure --address-prefix 10.12.1.0/28
+az network public-ip create -n VNet4GWIP -g Azure --allocation-method Dynamic
+az network vnet-gateway create -n VNet4GW -l westus --public-ip-address VNet4GWIP -g Azure --vnet VNet4 --gateway-type Vpn --sku VpnGw1 --vpn-type RouteBased --no-wait
+
+az network vnet-gateway show -n VNet1GW -g DevOps
+#"id": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/DevOps/providers/Microsoft.Network/virtualNetworkGateways/VNet1GW"
+az network vnet-gateway show -n VNet4GW -g Azure
+#"id": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Azure/providers/Microsoft.Network/virtualNetworkGateways/VNet4GW"
+
+az network vpn-connection create -n VNet1ToVNet4 -g DevOps --vnet-gateway1 /subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/DevOps/providers/Microsoft.Network/virtualNetworkGateways/VNet1GW -l eastus --shared-key "Minsk" --vnet-gateway2 /subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Azure/providers/Microsoft.Network/virtualNetworkGateways/VNet4GW
+az network vpn-connection create -n VNet4ToVNet1 -g Azure --vnet-gateway1 /subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Azure/providers/Microsoft.Network/virtualNetworkGateways/VNet4GW -l westus --shared-key "Minsk" --vnet-gateway2 /subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/DevOps/providers/Microsoft.Network/virtualNetworkGateways/VNet1GW
