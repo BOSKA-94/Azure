@@ -18,7 +18,7 @@
             "value": "Standard_DS1_v2"
         },
         "servicePrincipalClientId": {
-            "value": "c35eb7b0-30c4-46ef-a25b-d5ab24860aab"
+            "value": "d87f4fb8-aad9-467f-9f9c-85ce66111bda"
         },
         "servicePrincipalClientSecret": {
             "reference":  {
