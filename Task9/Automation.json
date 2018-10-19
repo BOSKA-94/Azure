@@ -35,7 +35,7 @@
       }
   },
   "variables": {
-      "runbookName": "Task9",
+      "runbookName": "Shutdown-ARM-VMs-Parallel",
       "scriptUri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/Workflow_Stop-AzureVM.ps1",
       "runbookDescription": "Authenticates to Azure and lists all the Azure V1 VMs",
       "sku": "Free"
