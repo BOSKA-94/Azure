@@ -3,7 +3,7 @@ workflow Shutdown-ARM-VMs-Parallel
 
 	$SubscriptionId         = "4712ca89-5e08-4d78-9f70-35f10bec642b"
     $TenantID               = "b41b72d0-4e9f-4c26-8a69-f949f367c91d"
-    $CredentialAssetName    = ""
+    $CredentialAssetName    = "Kiryl"
    
 
 
