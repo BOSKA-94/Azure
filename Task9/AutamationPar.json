@@ -1,0 +1,26 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "accountName": {
+      "value": "Baskaulau"
+    },
+    "jobId": {
+      "value": "Task9"
+    },
+    "credentialName": {
+      "value": "Kiryl"
+    },
+    "userName": {
+      "value": "Kiryl Baskaulau "
+    },
+    "password": {
+      "reference": {
+        "keyVault": {
+            "id": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task9"
+        },
+        "secretName": "epam"
+    }
+    }
+  }
+}
