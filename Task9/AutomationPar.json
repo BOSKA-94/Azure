@@ -5,22 +5,8 @@
     "accountName": {
       "value": "Baskaulau"
     },
-    "jobId": {
-      "value": "4d823e8d-2074-44d8-829a-693d525a2868"
-    },
     "credentialName": {
       "value": "Kiryl"
-    },
-    "userName": {
-      "value": "Task9"
-    },
-    "password": {
-      "reference": {
-        "keyVault": {
-            "id": "/subscriptions/4712ca89-5e08-4d78-9f70-35f10bec642b/resourceGroups/Minsk/providers/Microsoft.KeyVault/vaults/Task9"
-        },
-        "secretName": "epam"
-    }
     }
   }
 }
