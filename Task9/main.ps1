@@ -42,12 +42,13 @@ Function RegisterRP {
 $ErrorActionPreference = "Stop"
 
 # sign in
-#Write-Host "Logging in...";
-#Login-AzureRmAccount;
+Write-Host "Logging in...";
+Login-AzureRmAccount;
 
 # select subscription
-#Write-Host "Selecting subscription '$subscriptionId'";
-#Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+Write-Host "Selecting subscription '$subscriptionId'";
+
+Select-AzureRmSubscription -SubscriptionID $subscriptionId;
 
 # Register RPs
 $resourceProviders = @("microsoft.keyvault");
@@ -84,9 +85,13 @@ Write-Host "Starting deployment VM and Vnet...";
 New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $Vm_VNetPath;
 
 
-# Start the deployment Auromation Account
-$password = Read-Host -AsSecureString
+# Start the deployment Automation Account
+$password = Read-Host "Password for automation account" -AsSecureString
 $JobGUID = [System.Guid]::NewGuid().toString()
-New-AzureRmADAppCredential -ObjectId '60061f87-9334-4da4-82ac-1ee63154ac2f' -Password $password
+$AppRegestration = Get-AzureRmADApplication -DisplayName "Hanka"
+$AppRegestration
+$ObjectId = $AppRegestration.ObjectId
+$AppliccationId = $AppRegestration.ApplicationId
+New-AzureRmADAppCredential -ObjectId $ObjectId -Password $password
 Write-Host "Starting deployment Automation Account...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -TemplateParameterFile $AutomationParPath  -Verbose -password $password -userName 'a2195fa2-c860-498b-b6a1-056fc1f7d517' -JobId $JobGUID 
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -TemplateParameterFile $AutomationParPath -password $password -userName $AppliccationId -JobId $JobGUID 
