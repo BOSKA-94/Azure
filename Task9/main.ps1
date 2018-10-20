@@ -21,10 +21,7 @@ param(
     $VM_VNetPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/Vm_VNet.json",
 
     [string]
-    $AutomationPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/Automation.json",
-
-    [string]
-    $AutomationParPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/AutomationPar.json",
+    $AutomationPath = "C:\Azure\Task9\Automation.json",
 
     [Parameter(Mandatory = $True)]
     [SecureString]
@@ -43,11 +40,11 @@ $ErrorActionPreference = "Stop"
 
 # sign in
 Write-Host "Logging in...";
-Login-AzureRmAccount;
+#Login-AzureRmAccount;
 
 # select subscription
 Write-Host "Selecting subscription '$subscriptionId'";
-Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+#Select-AzureRmSubscription -SubscriptionID $subscriptionId;
 
 # Register RPs
 $resourceProviders = @("microsoft.keyvault");
@@ -85,12 +82,11 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Templa
 
 
 # Start the deployment Automation Account
-$password = Read-Host "Password for automation account" -AsSecureString
 $JobGUID = [System.Guid]::NewGuid().toString()
 $AppRegestration = Get-AzureRmADApplication -DisplayName "Hanka"
 $AppRegestration
 $ObjectId = $AppRegestration.ObjectId
 $AppliccationId = $AppRegestration.ApplicationId
-New-AzureRmADAppCredential -ObjectId $ObjectId -Password $password
+New-AzureRmADAppCredential -ObjectId $ObjectId -Password $secretvalue
 Write-Host "Starting deployment Automation Account...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $AutomationPath -TemplateParameterUri $AutomationParPath -password $password -userName $AppliccationId -JobId $JobGUID 
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -password $password -userName $AppliccationId -JobId $JobGUID 
