@@ -47,7 +47,6 @@ Login-AzureRmAccount;
 
 # select subscription
 Write-Host "Selecting subscription '$subscriptionId'";
-
 Select-AzureRmSubscription -SubscriptionID $subscriptionId;
 
 # Register RPs
