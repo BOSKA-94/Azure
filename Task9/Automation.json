@@ -2,18 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "accountName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the Azure Automation account to deploy to."
-      }
-    },
-    "credentialName": {
-      "type": "string",
-      "metadata": {
-        "description": "DefaultAzureCredential is the name of the Automation credential used in this runbook. This credential allows you to authenticate to Azure. "
-      }
-    },
     "userName": {
       "type": "string",
       "metadata": {
@@ -37,11 +25,13 @@
     "runbookName": "Shutdown-ARM-VMs-Parallel",
     "scriptUri": "https://baskaulau.blob.core.windows.net/task9/Workflow_Stop-AzureVM.ps1?sp=r&st=2018-10-20T09:02:14Z&se=2018-10-20T17:02:14Z&spr=https&sv=2017-11-09&sig=pxycH8zJQ%2B%2Bic5P5BArFE9aGCP%2Bmp3BuJ9I3RjbEAf8%3D&sr=b",
     "runbookDescription": "Authenticates to Azure and lists all the Azure V1 VMs",
-    "sku": "Free"
+    "sku": "Free",
+    "accountName": "Baskaulau",
+    "credentialName": "Kiryl"
   },
   "resources": [
     {
-      "name": "[parameters('accountName')]",
+      "name": "[variables('accountName')]",
       "type": "Microsoft.Automation/automationAccounts",
       "apiVersion": "2015-01-01-preview",
       "location": "[resourceGroup().location]",
@@ -59,7 +49,7 @@
           "apiVersion": "2015-01-01-preview",
           "location": "[resourceGroup().location]",
           "dependsOn": [
-            "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
           ],
           "tags": {},
           "properties": {
@@ -74,12 +64,12 @@
           }
         },
         {
-          "name": "[parameters('credentialName')]",
+          "name": "[variables('credentialName')]",
           "type": "credentials",
           "apiVersion": "2015-01-01-preview",
           "location": "[resourceGroup().location]",
           "dependsOn": [
-            "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
           ],
           "tags": {},
           "properties": {
@@ -93,8 +83,8 @@
           "apiVersion": "2015-01-01-preview",
           "location": "[resourceGroup().location]",
           "dependsOn": [
-            "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]",
-            "[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'), '/runbooks/',variables('runbookName'))]"
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]",
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'), '/runbooks/',variables('runbookName'))]"
           ],
           "tags": {
             "key": "value"
