@@ -23,7 +23,7 @@
   },
   "variables": {
     "runbookName": "Shutdown-ARM-VMs-Parallel",
-    "scriptUri": "https://baskaulau.blob.core.windows.net/task9/Workflow_Stop-AzureVM.ps1?sp=r&st=2018-10-20T09:02:14Z&se=2018-10-20T17:02:14Z&spr=https&sv=2017-11-09&sig=pxycH8zJQ%2B%2Bic5P5BArFE9aGCP%2Bmp3BuJ9I3RjbEAf8%3D&sr=b",
+    "scriptUri": "https://baskaulau.blob.core.windows.net/task9/Workflow_Stop-AzureVM.ps1?sp=r&st=2018-10-22T06:17:15Z&se=2018-10-22T14:17:15Z&spr=https&sv=2017-11-09&sig=sSNxRT0ZgR2MOrm7oz6AUGPNEDtGPOoMXf7vrcxRgBE%3D&sr=b",
     "runbookDescription": "Authenticates to Azure and lists all the Azure V1 VMs",
     "sku": "Free",
     "accountName": "Baskaulau",

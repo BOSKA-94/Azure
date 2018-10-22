@@ -40,11 +40,11 @@ $ErrorActionPreference = "Stop"
 
 # sign in
 Write-Host "Logging in...";
-Login-AzureRmAccount;
+#Login-AzureRmAccount;
 
 # select subscription
 Write-Host "Selecting subscription '$subscriptionId'";
-Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+#Select-AzureRmSubscription -SubscriptionID $subscriptionId;
 
 # Register RPs
 $resourceProviders = @("microsoft.keyvault");
@@ -89,4 +89,4 @@ $ObjectId = $AppRegestration.ObjectId
 $AppliccationId = $AppRegestration.ApplicationId
 New-AzureRmADAppCredential -ObjectId $ObjectId -Password $secretvalue
 Write-Host "Starting deployment Automation Account...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -password $secretvalue -userName $AppliccationId -JobId $JobGUID 
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -password $password -userName $AppliccationId -JobId $JobGUID 
