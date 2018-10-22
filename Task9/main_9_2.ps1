@@ -12,22 +12,22 @@ param(
     $deploymentName = "Task9",
 
     [string]
-    $KeyVaultPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/KeyVault.json",
-
-    [string]
-    $KeyVaultParPath = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/KeyVaultPar.json",
-
-    [string]
-    $VM_VNetPath = "C:\Azure\Task9\Vm_VNet.json",
+    $KeyVault_VNet = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/KeyVault_VNet.json",
 
     [string]
     $AutomationPath = "C:\Azure\Task9\Automation.json",
 
     [string]
-    $VM = "C:\Azure\Task9\VM.json",
+    $VM1 = "C:\Azure\Task9\VM.json",
 
     [string]
-    $VMParPath = "C:\Azure\Task9\VMpar.json",
+    $VMParPath1 = "C:\Azure\Task9\VMpar.json",
+
+    [string]
+    $VM2 = "C:\Azure\Task9\VM2.json",
+
+    [string]
+    $VMParPath2 = "C:\Azure\Task9\VMpar2.json",
 
     [Parameter(Mandatory = $True)]
     [SecureString]
@@ -91,18 +91,24 @@ $AppliccationId = $AppRegestration.ApplicationId
 New-AzureRmADAppCredential -ObjectId $ObjectId -Password $secretvalue
 Write-Host "Starting deployment Automation Account...";
 New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -password $secretvalue -userName $AppliccationId -JobId $JobGUID 
-
 $automationAccountKey = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomationAccount -ResourceGroupName $resourceGroupName | Get-AzureRmAutomationRegistrationInfo).PrimaryKey) -Force
 $automationAccountUrl = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomationAccount -ResourceGroupName $resourceGroupName | Get-AzureRmAutomationRegistrationInfo).Endpoint) -Force
 
-# Start the deployment Vm and VNet
-Write-Host "Starting deployment VM and Vnet...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $VM -TemplateParameterFile $VMParPath -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
 
 #DSC
 $AutomationAccount = (Get-AzureRmAutomationAccount).AutomationAccountName
 Import-AzureRmAutomationDscConfiguration -SourcePath 'C:\Azure\Task9\TestConfig.ps1' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccount -Published;
 Start-AzureRmAutomationDscCompilationJob -ConfigurationName 'TestConfig' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccount;
+
+
+# Start the deployment Vm with ISS
+Write-Host "Starting deployment Vm with ISS...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $VM1 -TemplateParameterFile $VMParPath1 -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
+
+# Start the deployment Vm without ISS
+Write-Host "Starting deployment Vm without ISS...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $VM2 -TemplateParameterFile $VMParPath2 -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
+
 
 #New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Templatefile "C:\Azure\Task9\VM.json" -TemplateParameterFile "C:\Azure\Task9\VMPar.json"
 #$UserName = (Get-AzureRmAutomationCredential -ResourceGroupName "Minsk" -AutomationAccountName "Baskaulau").UserName
