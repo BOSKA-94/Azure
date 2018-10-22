@@ -46,11 +46,11 @@ $ErrorActionPreference = "Stop"
 
 # sign in
 Write-Host "Logging in...";
-Login-AzureRmAccount;
+#Login-AzureRmAccount;
 
 # select subscription
 Write-Host "Selecting subscription '$subscriptionId'";
-Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+#Select-AzureRmSubscription -SubscriptionID $subscriptionId;
 
 # Register RPs
 $resourceProviders = @("microsoft.keyvault");
@@ -96,9 +96,9 @@ $automationAccountUrl = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomat
 
 
 #DSC
-$AutomationAccountName = (Get-AzureRmAutomationAccount).AutomationAccountName
-Import-AzureRmAutomationDscConfiguration -SourcePath 'C:\Azure\Task9\TestConfig.ps1' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccountName -Published;
-Start-AzureRmAutomationDscCompilationJob -ConfigurationName 'TestConfig' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccountName;
+$AutomationAccount = (Get-AzureRmAutomationAccount).AutomationAccountName
+Import-AzureRmAutomationDscConfiguration -SourcePath 'C:\Azure\Task9\TestConfig.ps1' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccount -Published;
+Start-AzureRmAutomationDscCompilationJob -ConfigurationName 'TestConfig' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccount;
 
 
 # Start the deployment Vm with ISS
