@@ -83,14 +83,13 @@ Set-AzureKeyVaultSecret -VaultName 'Task9' -Name 'epam' -SecretValue $secretvalu
 
 
 # Start the deployment Automation Account
-$JobGUID = [System.Guid]::NewGuid().toString()
 $AppRegestration = Get-AzureRmADApplication -DisplayName "Hanka"
 $AppRegestration
 $ObjectId = $AppRegestration.ObjectId
 $AppliccationId = $AppRegestration.ApplicationId
 New-AzureRmADAppCredential -ObjectId $ObjectId -Password $secretvalue
 Write-Host "Starting deployment Automation Account...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -password $secretvalue -userName $AppliccationId -JobId $JobGUID 
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -password $secretvalue -userName $AppliccationId;
 $automationAccountKey = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomationAccount -ResourceGroupName $resourceGroupName | Get-AzureRmAutomationRegistrationInfo).PrimaryKey) -Force
 $automationAccountUrl = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomationAccount -ResourceGroupName $resourceGroupName | Get-AzureRmAutomationRegistrationInfo).Endpoint) -Force
 
