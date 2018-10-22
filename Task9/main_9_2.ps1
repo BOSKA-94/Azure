@@ -109,8 +109,3 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Templa
 Write-Host "Starting deployment Vm without ISS...";
 New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $VM2 -TemplateParameterFile $VMParPath2 -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
 
-
-#New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Templatefile "C:\Azure\Task9\VM.json" -TemplateParameterFile "C:\Azure\Task9\VMPar.json"
-#$UserName = (Get-AzureRmAutomationCredential -ResourceGroupName "Minsk" -AutomationAccountName "Baskaulau").UserName
-#$UserName
-
