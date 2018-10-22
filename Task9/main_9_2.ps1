@@ -76,9 +76,9 @@ else {
 }
 
 
-# Start the deployment Key Vault
-Write-Host "Starting deployment Key Vault...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $KeyVaultPath -TemplateParameterUri $KeyVaultParPath;
+# Start the deployment Key Vault and Vnet
+Write-Host "Starting deployment Key Vault and Vnet...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $KeyVault_VNet;
 Set-AzureKeyVaultSecret -VaultName 'Task9' -Name 'epam' -SecretValue $secretvalue
 
 
