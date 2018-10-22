@@ -1,0 +1,102 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "userName": {
+      "type": "string",
+      "metadata": {
+        "description": "The username for the Azure Automation credential. Object Id"
+      }
+    },
+    "password": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the Azure Automation credential."
+      }
+    },
+    "jobId": {
+      "type": "string",
+      "metadata": {
+        "description": "The GUID for the runbook job to be started."
+      }
+    }
+  },
+  "variables": {
+    "runbookName": "Shutdown-ARM-VMs-Parallel",
+    "scriptUri": "https://baskaulau.blob.core.windows.net/task9/Workflow_Stop-AzureVM.ps1?sp=r&st=2018-10-22T06:17:15Z&se=2018-10-22T14:17:15Z&spr=https&sv=2017-11-09&sig=sSNxRT0ZgR2MOrm7oz6AUGPNEDtGPOoMXf7vrcxRgBE%3D&sr=b",
+    "runbookDescription": "Authenticates to Azure and lists all the Azure V1 VMs",
+    "sku": "Free",
+    "accountName": "Baskaulau",
+    "credentialName": "Kiryl"
+  },
+  "resources": [
+    {
+      "name": "[variables('accountName')]",
+      "type": "Microsoft.Automation/automationAccounts",
+      "apiVersion": "2015-01-01-preview",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [],
+      "tags": {},
+      "properties": {
+        "sku": {
+          "name": "[variables('sku')]"
+        }
+      },
+      "resources": [
+        {
+          "name": "[variables('runbookName')]",
+          "type": "runbooks",
+          "apiVersion": "2015-01-01-preview",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+          ],
+          "tags": {},
+          "properties": {
+            "runbookType": "Script",
+            "logProgress": "false",
+            "logVerbose": "false",
+            "description": "[variables('runbookDescription')]",
+            "publishContentLink": {
+              "uri": "[variables('scriptUri')]",
+              "version": "1.0.0.0"
+            }
+          }
+        },
+        {
+          "name": "[variables('credentialName')]",
+          "type": "credentials",
+          "apiVersion": "2015-01-01-preview",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
+          ],
+          "tags": {},
+          "properties": {
+            "userName": "[parameters('userName')]",
+            "password": "[parameters('password')]"
+          }
+        },
+        {
+          "name": "[parameters('jobId')]",
+          "type": "jobs",
+          "apiVersion": "2015-01-01-preview",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]",
+            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'), '/runbooks/',variables('runbookName'))]"
+          ],
+          "tags": {
+            "key": "value"
+          },
+          "properties": {
+            "runbook": {
+              "name": "[variables('runbookName')]"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {}
+}

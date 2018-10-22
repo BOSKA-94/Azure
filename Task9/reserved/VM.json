@@ -164,35 +164,6 @@
                 }
             },
             "tags": {}
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('virtualMachineName'),'/Microsoft.Powershell.DSC')]",
-            "apiVersion": "2018-04-01",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
-            ],
-            "properties": {
-                "publisher": "Microsoft.Powershell",
-                "type": "DSC",
-                "typeHandlerVersion": "2.76",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "configurationArguments": {
-                        "RegistrationUrl" : "https://baskaulau.blob.core.windows.net/task9/Workflow_Stop-AzureVM.ps1?sp=r&st=2018-10-22T11:19:00Z&se=2018-10-22T19:19:00Z&spr=https&sv=2017-11-09&sig=7CVjNjePL5P06p69ssEU%2BfwrFLsYSTyegSeHDxfGmvw%3D&sr=b",
-                        "NodeConfigurationName" : "TestConfig"
-                    }
-                },
-                "protectedSettings": {
-                    "configurationArguments": {
-                        "RegistrationKey": {
-                            "userName": "a2195fa2-c860-498b-b6a1-056fc1f7d517",
-                            "Password": "KsCJPC8+g7b3kXLL4Lc+wDbUmc4+GCuPq8Xq7cUKzbksIVkKPafgVvum8zjxOAbH0SAPUjQv1VKBglsjl8IOmA=="
-                        }
-                    }
-                }
-            }
         }
     ],
     "outputs": {
