@@ -1,120 +1,110 @@
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "userName": {
-      "type": "string",
-      "metadata": {
-        "description": "The username for the Azure Automation credential. Object Id"
-      }
-    },
-    "password": {
-      "type": "securestring",
-      "metadata": {
-        "description": "The password for the Azure Automation credential."
-      }
-    },
-    "jobId": {
-      "type": "string",
-      "metadata": {
-        "description": "The GUID for the runbook job to be started."
-      }
-    }
-  },
-  "variables": {
-    "runbookName": "Shutdown-ARM-VMs-Parallel",
-    "scriptUri": "https://baskaulau.blob.core.windows.net/task9/Workflow_Stop-AzureVM.ps1?sp=r&st=2018-10-22T06:17:15Z&se=2018-10-22T14:17:15Z&spr=https&sv=2017-11-09&sig=sSNxRT0ZgR2MOrm7oz6AUGPNEDtGPOoMXf7vrcxRgBE%3D&sr=b",
-    "runbookDescription": "Authenticates to Azure and lists all the Azure V1 VMs",
-    "sku": "Free",
-    "accountName": "Baskaulau",
-    "credentialName": "Kiryl"
-  },
-  "resources": [
-    {
-      "name": "[variables('accountName')]",
-      "type": "Microsoft.Automation/automationAccounts",
-      "apiVersion": "2015-01-01-preview",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [],
-      "tags": {},
-      "properties": {
-        "sku": {
-          "name": "[variables('sku')]"
-        }
-      },
-      "resources": [
-        {
-          "name": "[variables('runbookName')]",
-          "type": "runbooks",
-          "apiVersion": "2015-01-01-preview",
-          "location": "[resourceGroup().location]",
-          "dependsOn": [
-            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
-          ],
-          "tags": {},
-          "properties": {
-            "runbookType": "Script",
-            "logProgress": "false",
-            "logVerbose": "false",
-            "description": "[variables('runbookDescription')]",
-            "publishContentLink": {
-              "uri": "[variables('scriptUri')]",
-              "version": "1.0.0.0"
-            }
-          }
-        },
-        {
-          "name": "[variables('credentialName')]",
-          "type": "credentials",
-          "apiVersion": "2015-01-01-preview",
-          "location": "[resourceGroup().location]",
-          "dependsOn": [
-            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]"
-          ],
-          "tags": {},
-          "properties": {
-            "userName": "[parameters('userName')]",
-            "password": "[parameters('password')]"
-          }
-        },
-        {
-          "name": "[parameters('jobId')]",
-          "type": "jobs",
-          "apiVersion": "2015-01-01-preview",
-          "location": "[resourceGroup().location]",
-          "dependsOn": [
-            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'))]",
-            "[concat('Microsoft.Automation/automationAccounts/', variables('accountName'), '/runbooks/',variables('runbookName'))]"
-          ],
-          "tags": {
-            "key": "value"
-          },
-          "properties": {
-            "runbook": {
-              "name": "[variables('runbookName')]"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "DSC_Node",
-      "type": "Microsoft.Automation/automationAccounts/nodeConfigurations",
-      "apiVersion": "2018-01-15",
-      "properties": {
-        "source": {
-          "type": "string",
-          "value": "string",
-          "version": "string"
-        },
-        "name": "string",
-        "configuration": {
-          "name": "TestConfig"
-        },
-        "incrementNodeConfigurationBuild": false
-      },
-      "tags": {}
-    }
-  ],
-  "outputs": {}
+param(
+    [string]
+    $subscriptionId = "4712ca89-5e08-4d78-9f70-35f10bec642b",
+
+    [string]
+    $resourceGroupName = "Minsk",
+
+    [string]
+    $resourceGroupLocation,
+
+    [string]
+    $deploymentName = "Task9",
+
+    [string]
+    $KeyVault_VNet = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/KeyVault_VNet.json",
+
+    [string]
+    $AutomationPath = "C:\Azure\Task9\Automation_9_2.json",
+
+    [string]
+    $VM1 = "C:\Azure\Task9\VM.json",
+
+    [string]
+    $VMParPath1 = "C:\Azure\Task9\VMpar.json",
+
+    [string]
+    $VM2 = "C:\Azure\Task9\VM2.json",
+
+    [string]
+    $VMParPath2 = "C:\Azure\Task9\VMpar2.json",
+
+    [Parameter(Mandatory = $True)]
+    [SecureString]
+    $secretvalue
+)
+Function RegisterRP {
+    Param(
+        [string]$ResourceProviderNamespace
+    )
+
+    Write-Host "Registering resource provider '$ResourceProviderNamespace'";
+    Register-AzureRmResourceProvider -ProviderNamespace $ResourceProviderNamespace;
 }
+
+$ErrorActionPreference = "Stop"
+
+# sign in
+Write-Host "Logging in...";
+#Login-AzureRmAccount;
+
+# select subscription
+Write-Host "Selecting subscription '$subscriptionId'";
+#Select-AzureRmSubscription -SubscriptionID $subscriptionId;
+
+# Register RPs
+$resourceProviders = @("microsoft.keyvault");
+if ($resourceProviders.length) {
+    Write-Host "Registering resource providers"
+    foreach ($resourceProvider in $resourceProviders) {
+        RegisterRP($resourceProvider);
+    }
+}
+
+#Create or check for existing resource group
+$resourceGroup = Get-AzureRmResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue
+if (!$resourceGroup) {
+    Write-Host "Resource group '$resourceGroupName' does not exist. To create a new resource group, please enter a location.";
+    if (!$resourceGroupLocation) {
+        $resourceGroupLocation = Read-Host "resourceGroupLocation";
+    }
+    Write-Host "Creating resource group '$resourceGroupName' in location '$resourceGroupLocation'";
+    New-AzureRmResourceGroup -Name $resourceGroupName -Location $resourceGroupLocation
+}
+else {
+    Write-Host "Using existing resource group '$resourceGroupName'";
+}
+
+
+# Start the deployment Key Vault and Vnet
+Write-Host "Starting deployment Key Vault and Vnet...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $KeyVault_VNet;
+Set-AzureKeyVaultSecret -VaultName 'Task9' -Name 'epam' -SecretValue $secretvalue
+
+
+# Start the deployment Automation Account
+$AppRegestration = Get-AzureRmADApplication -DisplayName "Hanka"
+$AppRegestration
+$ObjectId = $AppRegestration.ObjectId
+$AppliccationId = $AppRegestration.ApplicationId
+New-AzureRmADAppCredential -ObjectId $ObjectId -Password $secretvalue
+Write-Host "Starting deployment Automation Account...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $AutomationPath -password $secretvalue -userName $AppliccationId;
+$automationAccountKey = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomationAccount -ResourceGroupName $resourceGroupName | Get-AzureRmAutomationRegistrationInfo).PrimaryKey) -Force
+$automationAccountUrl = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomationAccount -ResourceGroupName $resourceGroupName | Get-AzureRmAutomationRegistrationInfo).Endpoint) -Force
+
+
+#DSC
+$AutomationAccount = (Get-AzureRmAutomationAccount).AutomationAccountName
+Import-AzureRmAutomationDscConfiguration -SourcePath 'C:\Azure\Task9\TestConfig.ps1' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccount -Published;
+Start-AzureRmAutomationDscCompilationJob -ConfigurationName 'TestConfig' -ResourceGroupName $resourceGroupName -AutomationAccountName $AutomationAccount;
+
+
+# Start the deployment Vm with ISS
+Write-Host "Starting deployment Vm with ISS...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $VM1 -TemplateParameterFile $VMParPath1 -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
+
+# Start the deployment Vm without ISS
+Write-Host "Starting deployment Vm without ISS...";
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $VM2 -TemplateParameterFile $VMParPath2 -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
+

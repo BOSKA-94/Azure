@@ -15,7 +15,7 @@ param(
     $KeyVault_VNet = "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/KeyVault_VNet.json",
 
     [string]
-    $AutomationPath = "C:\Azure\Task9\Automation.json",
+    $AutomationPath = "C:\Azure\Task9\Automation_9_2.json",
 
     [string]
     $VM1 = "C:\Azure\Task9\VM.json",
