@@ -96,6 +96,24 @@
           }
         }
       ]
+    },
+    {
+      "name": "DSC_Node",
+      "type": "Microsoft.Automation/automationAccounts/nodeConfigurations",
+      "apiVersion": "2018-01-15",
+      "properties": {
+        "source": {
+          "type": "string",
+          "value": "string",
+          "version": "string"
+        },
+        "name": "string",
+        "configuration": {
+          "name": "TestConfig"
+        },
+        "incrementNodeConfigurationBuild": false
+      },
+      "tags": {}
     }
   ],
   "outputs": {}

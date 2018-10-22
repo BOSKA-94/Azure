@@ -52,13 +52,30 @@
         },
         "diagnosticsStorageAccountId": {
             "type": "string"
-        }
+        },
+        "automationAccountKey": {
+            "type": "securestring"
+          },
+          "automationAccountUrl": {
+            "type": "securestring"
+      }
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
         "vnetId": "[parameters('virtualNetworkId')]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
-        "vmExtensionName": "dscExtension"
+        "vmExtensionName": "dscExtension",
+        "vm_pref": "comp",
+        "res_count": 2,
+        "dnsPrefixForPublicIP": "[uniqueString(resourceGroup().id)]",
+        "configurationMode": "ApplyAndMonitor",
+        "nodeConfigurationName": "",
+        "configurationModeFrequencyMins": 15,
+        "refreshFrequencyMins": 30,
+        "rebootNodeIfNeeded": true,
+        "actionAfterReboot": "ContinueConfiguration",
+        "allowModuleOverwrite": false,
+        "timestamp": "MM/dd/yyyy H:mm:ss tt"
     },
     "resources": [
         {
@@ -167,30 +184,83 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('virtualMachineName'),'/Microsoft.Powershell.DSC')]",
-            "apiVersion": "2018-04-01",
-            "location": "[resourceGroup().location]",
+            "name": "[concat(variables('vm_pref'), copyIndex(1),'/Microsoft.Powershell.DSC')]",
+            "copy": {
+                "name": "DSCcopy",
+                "count": "[variables('res_count')]"
+            },
             "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/', parameters('virtualMachineName'))]"
+                "[concat(variables('vm_pref'), copyIndex(1))]"
             ],
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "publisher": "Microsoft.Powershell",
                 "type": "DSC",
-                "typeHandlerVersion": "2.76",
+                "typeHandlerVersion": "2.19",
                 "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "configurationArguments": {
-                        "RegistrationUrl" : "https://baskaulau.blob.core.windows.net/task9/Workflow_Stop-AzureVM.ps1?sp=r&st=2018-10-22T11:19:00Z&se=2018-10-22T19:19:00Z&spr=https&sv=2017-11-09&sig=7CVjNjePL5P06p69ssEU%2BfwrFLsYSTyegSeHDxfGmvw%3D&sr=b",
-                        "NodeConfigurationName" : "TestConfig"
+                "protectedSettings": {
+                    "Items": {
+                        "registrationKeyPrivate": "[parameters('automationAccountKey')]"
                     }
                 },
-                "protectedSettings": {
-                    "configurationArguments": {
-                        "RegistrationKey": {
-                            "userName": "a2195fa2-c860-498b-b6a1-056fc1f7d517",
-                            "Password": "KsCJPC8+g7b3kXLL4Lc+wDbUmc4+GCuPq8Xq7cUKzbksIVkKPafgVvum8zjxOAbH0SAPUjQv1VKBglsjl8IOmA=="
+                "settings": {
+                    "ConfigurationFunction": "",
+                    "Properties": [
+                        {
+                            "Name": "RegistrationKey",
+                            "Value": {
+                                "UserName": "PLACEHOLDER_DONOTUSE",
+                                "Password": "PrivateSettingsRef:registrationKeyPrivate"
+                            },
+                            "TypeName": "System.Management.Automation.PSCredential"
+                        },
+                        {
+                            "Name": "RegistrationUrl",
+                            "Value": "[parameters('automationAccountUrl')]",
+                            "TypeName": "System.String"
+                        },
+                        {
+                            "Name": "NodeConfigurationName",
+                            "Value": "[variables('nodeConfigurationName')]",
+                            "TypeName": "System.String"
+                        },
+                        {
+                            "Name": "ConfigurationMode",
+                            "Value": "[variables('configurationMode')]",
+                            "TypeName": "System.String"
+                        },
+                        {
+                            "Name": "ConfigurationModeFrequencyMins",
+                            "Value": "[variables('configurationModeFrequencyMins')]",
+                            "TypeName": "System.Int32"
+                        },
+                        {
+                            "Name": "RefreshFrequencyMins",
+                            "Value": "[variables('refreshFrequencyMins')]",
+                            "TypeName": "System.Int32"
+                        },
+                        {
+                            "Name": "RebootNodeIfNeeded",
+                            "Value": "[variables('rebootNodeIfNeeded')]",
+                            "TypeName": "System.Boolean"
+                        },
+                        {
+                            "Name": "ActionAfterReboot",
+                            "Value": "[variables('actionAfterReboot')]",
+                            "TypeName": "System.String"
+                        },
+                        {
+                            "Name": "AllowModuleOverwrite",
+                            "Value": "[variables('allowModuleOverwrite')]",
+                            "TypeName": "System.Boolean"
+                        },
+                        {
+                            "Name": "Timestamp",
+                            "Value": "[variables('timestamp')]",
+                            "TypeName": "System.String"
                         }
-                    }
+                    ]
                 }
             }
         }
