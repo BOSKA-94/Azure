@@ -30,35 +30,16 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "VM1",
+            "name": "KeyVault",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/VM.json",
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/KeyVault.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parametersLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/VMPar.json",
-                    "contentVersion": "1.0.0.0"
-                }
-            },
-            "dependsOn": [
-                "Vnet"
-            ]
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "VM2",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/VM2.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parametersLink": {
-                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/VMPar2.json",
+                    "uri": "https://raw.githubusercontent.com/BOSKA-94/Azure/master/Task9/KeyVaultPar.json",
                     "contentVersion": "1.0.0.0"
                 }
             },

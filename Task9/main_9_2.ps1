@@ -23,6 +23,12 @@ param(
     [string]
     $AutomationPath = "C:\Azure\Task9\Automation.json",
 
+    [string]
+    $VM = "C:\Azure\Task9\VM.json",
+
+    [string]
+    $VMParPath = "C:\Azure\Task9\VMpar.json",
+
     [Parameter(Mandatory = $True)]
     [SecureString]
     $secretvalue
@@ -91,7 +97,7 @@ $automationAccountUrl = ConvertTo-SecureString -AsPlainText ((Get-AzureRmAutomat
 
 # Start the deployment Vm and VNet
 Write-Host "Starting deployment VM and Vnet...";
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $Vm_VNetPath -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
+New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $VM -TemplateParameterFile $VMParPath -automationAccountKey $automationAccountKey -automationAccountUrl $automationAccountUrl;
 
 #DSC
 $AutomationAccount = (Get-AzureRmAutomationAccount).AutomationAccountName

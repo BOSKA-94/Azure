@@ -55,21 +55,18 @@
         },
         "automationAccountKey": {
             "type": "securestring"
-          },
-          "automationAccountUrl": {
+        },
+        "automationAccountUrl": {
             "type": "securestring"
-      }
+        }
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
         "vnetId": "[parameters('virtualNetworkId')]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
         "vmExtensionName": "dscExtension",
-        "vm_pref": "comp",
-        "res_count": 2,
-        "dnsPrefixForPublicIP": "[uniqueString(resourceGroup().id)]",
         "configurationMode": "ApplyAndMonitor",
-        "nodeConfigurationName": "",
+        "nodeConfigurationName": "TestConfig.IsWebServer",
         "configurationModeFrequencyMins": 15,
         "refreshFrequencyMins": 30,
         "rebootNodeIfNeeded": true,
@@ -184,16 +181,12 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(variables('vm_pref'), copyIndex(1),'/Microsoft.Powershell.DSC')]",
-            "copy": {
-                "name": "DSCcopy",
-                "count": "[variables('res_count')]"
-            },
-            "dependsOn": [
-                "[concat(variables('vm_pref'), copyIndex(1))]"
-            ],
+            "name": "[concat(parameters('virtualMachineName'),'/', variables('vmExtensionName'))]",
             "apiVersion": "2015-06-15",
             "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[parameters('virtualMachineName')]"
+            ],
             "properties": {
                 "publisher": "Microsoft.Powershell",
                 "type": "DSC",
