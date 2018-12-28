@@ -1,7 +1,7 @@
 Configuration BaseInstall
 {
     param ($MachineName)
-    import-DscResource -ModuleName 'PSDesiredStateConfiguration'
+    import-DscResource -ModuleName 'PSDesiredStateConfiguration', 'xPSDesiredStateConfiguration'
     Node $MachineName
     {
             $zipUri = 'https://www.7-zip.org/a/7z1805-x64.msi'
