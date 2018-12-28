@@ -1,7 +1,6 @@
 Configuration BaseInstall
 {
     param ($MachineName)
-    import-DscResource -ModuleName 'xPSDesiredStateConfiguration'
     import-DscResource -ModuleName 'PSDesiredStateConfiguration'
     Node $MachineName
     {
