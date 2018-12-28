@@ -1,25 +1,33 @@
 Configuration BaseInstall
 {
     param ($MachineName)
-    Import-DscResource -Module PSDesiredStateConfiguration, xWebAdministration, xNetworking, xRemoteFile
-
-
+    import-DscResource -ModuleName 'xPSDesiredStateConfiguration'
+    import-DscResource -ModuleName 'PSDesiredStateConfiguration'
     Node $MachineName
     {
-#Added Notepad ++ 
-        xRemoteFile Notepad
-        {
-            DestinationPath = "D:\npp.7.5.6.Installer.x64.exe"
-            Uri = "https://notepad-plus-plus.org/repository/7.x/7.5.6/npp.7.5.6.Installer.x64.exe"
-            MatchSource = $false
+            $zipUri = 'https://www.7-zip.org/a/7z1805-x64.msi'
+            $JreUri = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=235727_2787e4a523244c269598db4e85c51e0c'
+            $zipOut = '7z1805-x64.msi'
+            $JreOut = 'jre-8u191-windows-x64.exe'
+            $InstallDir = 'C:\Install'
+#EnableTLS 1.2 
+Script EnableTLS12 {
+    SetScript  = {
+        [ Net.ServicePointManager ]::SecurityProtocol = [ Net.ServicePointManager ]::SecurityProtocol.toString() + ' , ' + [ Net.SecurityProtocolType ]::Tls12
+    }
+    TestScript = {
+        return ([ Net.ServicePointManager ]::SecurityProtocol -match ' Tls12 ' )
+    }
+    GetScript  = {
+        return @{
+            Result = ([ Net.ServicePointManager ]::SecurityProtocol -match ' Tls12 ' )
         }
-        Package Notepad
-        {
-            Ensure = "Present"
-            Name = "Notepad++ (64-bit x64)"
-            Path = "D:\npp.7.5.6.Installer.x64.exe"
-            ProductId = ''
-            Arguments = "/S"   
-        }
+    }
+}
+xRemoteFile Zip {
+    DestinationPath = "$InstallDir"
+    Uri             = $zipUri
+    MatchSource = $false
+}
     }
 }
