@@ -2,7 +2,7 @@ Configuration BaseInstall
 {
     param ($MachineName)
     import-DscResource -ModuleName 'PSDesiredStateConfiguration'
-    Node localhost
+    Node $MachineName
     {
         $zipUri = 'https://www.7-zip.org/a/7z1805-x64.msi'
         $JreUri = 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=235727_2787e4a523244c269598db4e85c51e0c'
@@ -22,9 +22,10 @@ Configuration BaseInstall
                 Test-Path -Path "C:\Install\7z1805-x64.msi"
             }
             GetScript  = {
+                #Something
             }
         }
     }
 }
-BaseInstall -OutputPath C:\mof
-Start-DscConfiguration -Path C:\mof -ComputerName localhost -Force -Verbose -wait
+BaseInstall
+Start-DscConfiguration -Path C:\mof -ComputerName 'localhost' -Force -Verbose -wait
