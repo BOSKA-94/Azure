@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "networkInterfaceName": {
+            "value": "LCCLABFED01-NIC"
+        },
+        "subnetName": {
+            "value": "LC-CLAB-SN-T01"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/1690b916-23f3-4f05-b9da-de926c56339c/resourceGroups/LC-CLAB-RG-DT/providers/Microsoft.Network/virtualNetworks/LO-DAM-VNET-P01"
+        },
+        "publicIpAddressName": {
+            "value": "LCCLABFED01-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        },
+        "virtualMachineName": {
+            "value": "LCCLABFED01"
+        },
+        "virtualMachineRG": {
+            "value": "LC-CLAB-RG-DT"
+        },
+        "osDiskType": {
+            "value": "Standard_LRS"
+        },
+        "osDiskName": {
+            "value": "LCCLABFED01_OsDisk"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_E2s_v3"
+        },
+        "adminUsername": {
+            "value": "devadmin"
+        },
+        "adminPassword": {
+            "value": "Administrator2018"
+        },
+        "DSC": {
+            "value": "https://github.com/BOSKA-94/Work/raw/master/DEV%20to%20Azure/DSC.zip"
+        },
+        "DSCfunctions": {
+            "value": "DSC.ps1\\BaseInstall"
+        }
+    }
+}
