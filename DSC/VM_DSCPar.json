@@ -36,7 +36,7 @@
             "value": "LCCLABFED01_OsDisk"
         },
         "virtualMachineSize": {
-            "value": "Standard_E2s_v3"
+            "value": "Standard_DS2_v2"
         },
         "adminUsername": {
             "value": "devadmin"
@@ -45,7 +45,7 @@
             "value": "Administrator2018"
         },
         "DSC": {
-            "value": "https://github.com/BOSKA-94/Work/raw/master/DEV%20to%20Azure/DSC.zip"
+            "value": "https://github.com/BOSKA-94/Azure/raw/master/DSC/DSC.zip"
         },
         "DSCfunctions": {
             "value": "DSC.ps1\\BaseInstall"
