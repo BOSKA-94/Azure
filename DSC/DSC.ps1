@@ -26,6 +26,9 @@ Configuration BaseInstall
         }
         Script downloadSoft {
             SetScript  = {
+                If (!(Test-Path -Path "C:\Install" -PathType Container)) { 
+                    New-Item -ItemType Directory -Path "C:\" -Name "Install"
+                }
                 Invoke-WebRequest -Uri $zipUri -OutFile "C:\Install\7z1805-x64.msi" -UseBasicParsing -Verbose 
             }
             TestScript = {
