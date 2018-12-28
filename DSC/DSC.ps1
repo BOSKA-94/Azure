@@ -28,4 +28,4 @@ Configuration BaseInstall
     }
 }
 BaseInstall
-Start-DscConfiguration -Path C:\mof -ComputerName 'localhost' -Force -Verbose -wait
+Start-DscConfiguration .\BaseInstall -ComputerName 'localhost' -Force -Verbose -wait
