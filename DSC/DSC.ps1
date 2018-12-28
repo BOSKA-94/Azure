@@ -1,7 +1,7 @@
 Configuration BaseInstall
 {
     param ($MachineName)
-    Import-DscResource -Module PSDesiredStateConfiguration, xWebAdministration
+    Import-DscResource -Module PSDesiredStateConfiguration, xWebAdministration, xNetworking, xRemoteFile
 
 
     Node $MachineName

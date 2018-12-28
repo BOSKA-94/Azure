@@ -52,7 +52,7 @@
         }
     },
     "variables": {
-        "nsgId": "/subscriptions/461f42fd-50e7-4454-8fda-4b229b67716b/resourceGroups/LC-CLAB-RG-DT/providers/Microsoft.Network/networkSecurityGroups/LC-CLAB-NSG-T01",
+        "nsgId": "/subscriptions/1690b916-23f3-4f05-b9da-de926c56339c/resourceGroups/LC-CLAB-RG-DT/providers/Microsoft.Network/networkSecurityGroups/LC-CLAB-NSG-T01",
         "vnetId": "[parameters('virtualNetworkId')]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
         "vmExtensionName": "DSC"

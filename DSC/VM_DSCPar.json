@@ -6,7 +6,7 @@
             "value": "westeurope"
         },
         "networkInterfaceName": {
-            "value": "LCCLABFED01-NIC"
+            "value": "DSCBaskaulau-NIC"
         },
         "subnetName": {
             "value": "LC-CLAB-SN-T01"
@@ -15,7 +15,7 @@
             "value": "/subscriptions/1690b916-23f3-4f05-b9da-de926c56339c/resourceGroups/LC-CLAB-RG-DT/providers/Microsoft.Network/virtualNetworks/LO-DAM-VNET-P01"
         },
         "publicIpAddressName": {
-            "value": "LCCLABFED01-ip"
+            "value": "DSCBaskaulau-ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -24,16 +24,16 @@
             "value": "Basic"
         },
         "virtualMachineName": {
-            "value": "LCCLABFED01"
+            "value": "DSCBaskaulau"
         },
         "virtualMachineRG": {
             "value": "LC-CLAB-RG-DT"
         },
         "osDiskType": {
-            "value": "Standard_LRS"
+            "value": "Premium_LRS"
         },
         "osDiskName": {
-            "value": "LCCLABFED01_OsDisk"
+            "value": "DSCBaskaulau_OsDisk"
         },
         "virtualMachineSize": {
             "value": "Standard_DS2_v2"
