@@ -24,6 +24,7 @@ Script EnableTLS12 {
         }
     }
 }
+#7zip
 xRemoteFile Zip {
     DestinationPath = "$InstallDir"
     Uri             = $zipUri
