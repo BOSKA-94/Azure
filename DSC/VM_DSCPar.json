@@ -44,11 +44,14 @@
         "adminPassword": {
             "value": "Administrator2018"
         },
-        "DSC": {
+        "DSC_URL": {
             "value": "https://github.com/BOSKA-94/Azure/raw/master/DSC/DSC.zip"
         },
+        "DSC_Script": {
+            "value": "DSC.ps1"
+        },
         "DSCfunctions": {
-            "value": "DSC.ps1\\BaseInstall"
+            "value": "BaseInstall"
         }
     }
 }

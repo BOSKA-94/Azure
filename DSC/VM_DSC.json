@@ -44,7 +44,10 @@
         "adminPassword": {
             "type": "secureString"
         },
-        "DSC": {
+        "DSC_URL": {
+            "type": "string"
+        },
+        "DSC_Script": {
             "type": "string"
         },
         "DSCfunctions": {
@@ -157,11 +160,15 @@
             "properties": {
                 "publisher": "Microsoft.Powershell",
                 "type": "DSC",
-                "typeHandlerVersion": "2.19",
+                "typeHandlerVersion": "2.76",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
-                    "ModulesUrl": "[parameters('DSC')]",
-                    "ConfigurationFunction": "[parameters('DSCfunctions')]",
+                    "wmfVersion": "latest",
+                    "configuration": {
+                        "url": "[parameters('DSC_URL')]",
+                        "script": "[parameters('DSC_Script')]",
+                        "function": "[parameters('DSCfunctions')]"
+                    },
                     "Properties": {
                         "MachineName": "[parameters('virtualMachineName')]"
                     }
