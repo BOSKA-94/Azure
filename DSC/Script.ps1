@@ -7,10 +7,10 @@ param(
 
     ################Storage Account################################################
     [string]
-    $StoragePath = "C:\Users\Kiryl_Baskaulau\Desktop\Azure-1\DSC\VM_DSC.json",
+    $StoragePath = "C:\Users\Kiryl_Baskaulau\Desktop\Azure-1\DSC\StorageAccount.json",
 
     [string]
-    $StorageParPath = "C:\Users\Kiryl_Baskaulau\Desktop\Azure-1\DSC\VM_DSCPar.json",
+    $StorageParPath = "C:\Users\Kiryl_Baskaulau\Desktop\Azure-1\DSC\StorageAccountPar.json",
 
 ################DSC1################################################
     [string]

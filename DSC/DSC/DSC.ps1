@@ -4,7 +4,7 @@ Configuration BaseInstall
     import-DscResource -ModuleName 'PSDesiredStateConfiguration', 'xPSDesiredStateConfiguration'
     Node $MachineName
     {
-     #Added Notepad ++ 
+     #Added Notepad++
      xRemoteFile Notepad
      {
          DestinationPath = "D:\npp.7.5.6.Installer.x64.exe"
