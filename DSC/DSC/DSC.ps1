@@ -4,24 +4,36 @@ Configuration BaseInstall
     import-DscResource -ModuleName 'PSDesiredStateConfiguration', 'xPSDesiredStateConfiguration'
     Node $MachineName
     {
-     #Added Notepad++
-     xRemoteFile Notepad
-     {
-         DestinationPath = "C:\npp.7.5.6.Installer.x64.exe"
-         Uri = "https://notepad-plus-plus.org/repository/7.x/7.5.6/npp.7.5.6.Installer.x64.exe"
-         MatchSource = $false
-     }
-     Package Notepad
-     {
-         Ensure = "Present"
-         Name = "Notepad++ (64-bit x64)"
-         Path = "C:\npp.7.5.6.Installer.x64.exe"
-         ProductId = ''
-         Arguments = "/S"
-         DependsOn = "[xRemoteFile]Notepad"
-         
-     }   
+        Script EnableTLS12 {
+            SetScript  = {
+                [ Net.ServicePointManager ]::SecurityProtocol = [ Net.ServicePointManager ]::SecurityProtocol.toString() + ' , ' + [ Net.SecurityProtocolType ]::Tls12
+            }
+            TestScript = {
+                return ([ Net.ServicePointManager ]::SecurityProtocol -match ' Tls12 ' )
+            }
+            GetScript  = {
+                return @{
+                    Result = ([ Net.ServicePointManager ]::SecurityProtocol -match ' Tls12 ' )
+                }
+            }
+        }
+
+        Script InstallNotepadd {
+            SetScript  = {
+                #Check Install directory
+                If (!(Test-Path -Path "C:\Install" -PathType Container)) {
+                    New-Item -ItemType Directory -Path "C:\" -Name "Install"
+                }
+                Invoke-WebRequest -Uri "https://notepad-plus-plus.org/repository/7.x/7.6.2/npp.7.6.2.Installer.x64.exe" -OutFile "C:\Install"
+                Start-Process 'C:\Install\adam\npp.7.6.2.Installer.x64' "/S"
+            }
+            TestScript = {
+                (Test-Path 'C:\Program Files\Notepad++\notepad++.exe')
+            }
+            GetScript  = {
+            }
+        }
     }
 }
-BaseInstall
-Start-DscConfiguration .\BaseInstall -ComputerName 'localhost' -Force -Verbose -wait
+BaseInstall -OutputPath C:\soft\mof
+Start-DscConfiguration -Path C:\soft\mof -ComputerName $MachineName -Force -Verbose -wait
